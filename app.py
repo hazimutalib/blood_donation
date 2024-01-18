@@ -1,9 +1,9 @@
 import pandas as pd
 import streamlit as st
 
-# donations_state_url = "https://raw.githubusercontent.com/MoH-Malaysia/data-darah-public/main/donations_state.csv"
+donations_state_url = "https://raw.githubusercontent.com/MoH-Malaysia/data-darah-public/main/donations_state.csv"
 
-# df = pd.read_csv(donations_state_url)
-# st.write(df)
+df = pd.read_csv(donations_state_url)
+st.write(df)
 
 st.write('hello')
