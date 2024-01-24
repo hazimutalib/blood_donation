@@ -86,7 +86,7 @@ def historical_trends(df):
 
     column = st.columns([5,1,5,1,5])
 
-    fig = px.bar(df[df.state != 'Malaysia'].groupby('state')['daily'].sum(), orientation='h', text_auto='.2s', width = 440, height = 500, 
+    fig = px.bar(df[df.state != 'Malaysia'].groupby('state')['daily'].sum(), orientation='h', text_auto='.2s', width = 400, height = 500, 
                 title = 'Blood donors by state')
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
@@ -97,7 +97,7 @@ def historical_trends(df):
     column[0].write(fig)
 
     fig = px.line(df_new.groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily',
-                width = 440, height = 500, title = 'Time series of blood donors of Malaysia')
+                width = 400, height = 500, title = 'Time series of blood donors of Malaysia')
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
@@ -106,7 +106,7 @@ def historical_trends(df):
 
 
     fig = px.line(df[(df.state != 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', color = 'state',
-                width = 440, height = 500, title = 'Time series of blood donors across state')
+                width = 400, height = 500, title = 'Time series of blood donors across state')
     # fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
