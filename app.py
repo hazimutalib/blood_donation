@@ -45,11 +45,6 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-column = st.columns([1,1,1])
-
-
-    
-
 donations_state_url = "https://raw.githubusercontent.com/MoH-Malaysia/data-darah-public/main/donations_state.csv"
 kpi_box_css()
 df = pd.read_csv(donations_state_url)
