@@ -46,7 +46,7 @@ st.markdown(
 )
 
 column = st.columns([1,1,1])
-trends = column[0].selectbox('Trends:', ['Latest daily update', 'Historical trends', 'Blood donors retention trend'])
+
 
     
 
@@ -215,12 +215,16 @@ def retention_trends(df):
     # st.write(donors)
     # st.write(unique_donors)
 
-if trends == 'Latest daily update': 
-    yesterday_trends(df)
-elif trends == 'Historical trends':
-    historical_trends(df)
-else:
-    retention_trends(df)
+tab1, tab2, tab3 = st.tabs(["Latest daily update", "Historical trends", "Blood retention trends"])
+
+with tab1:
+   yesterday_trends(df)
+
+with tab2:
+   historical_trends(df)
+
+with tab3:
+   retention_trends(df)
 
 
 
