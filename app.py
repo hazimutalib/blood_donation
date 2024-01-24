@@ -19,7 +19,19 @@ st.set_page_config(layout="wide")
 
 body_css()
 
-st.markdown(f'<p style="background-color:#0066cc;color:#33ff33;font-size:24px;border-radius:2%;"></p>', unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background: url("https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg")
+    }
+   .sidebar .sidebar-content {
+        background: url("https://www.travelandleisure.com/thmb/KTIha5CLifSoUD3gx0YP51xc3rY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/blue0517-4dfc85cb0200460ab717b101ac07888f.jpg")
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 st.markdown(
     f"""
@@ -87,12 +99,12 @@ def historical_trends(df):
     column = st.columns([5,1,5,1,5])
 
     fig = px.bar(df[df.state != 'Malaysia'].groupby('state')['daily'].sum(), orientation='h', text_auto='.2s', width = 360, height = 500, 
-                title = 'Blood donors by state')
+                title = 'Blood donors by state',)
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(yaxis = {"categoryorder":"total ascending"})
-    fig.update_layout(plot_bgcolor='white', paper_bgcolor = 'white')
+    fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_xaxes(showticklabels=False)
     column[0].write(fig)
 
@@ -101,7 +113,7 @@ def historical_trends(df):
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
-    fig.update_layout(plot_bgcolor='white', paper_bgcolor = 'white')
+    fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     column[2].write(fig)
 
 
