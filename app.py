@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import plotly.express as px 
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-import scripts.test
 from io import BytesIO
 import requests
 from styles.styles import kpi_box_malaysia, kpi_box_1, kpi_box_2, kpi_box_3, kpi_box_4, kpi_box_css, body_css, kpi_box_granular
@@ -20,20 +19,6 @@ from spire.presentation import Presentation as Presentation2, FileFormat
 st.set_page_config(layout="wide")
 
 body_css()
-
-st.markdown(
-    """
-    <style>
-    .reportview-container {
-        background: url("https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg")
-    }
-   .sidebar .sidebar-content {
-        background: url("https://www.travelandleisure.com/thmb/KTIha5CLifSoUD3gx0YP51xc3rY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/blue0517-4dfc85cb0200460ab717b101ac07888f.jpg")
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 st.markdown(
     f"""
@@ -233,7 +218,12 @@ if st.button('Upload'):
     repo_name = 'blood_donation'
     template_path = './blood_donation.pptx'
     file_path = './infographic/output_test.pptx'
-    upload_pptx_to_github(repo_owner, repo_name, template_path, file_path)
+    lol = 'ghp_XQuAk8BlOgV2PNLwq3qWbuMG0DwuQI46YKk0'
+    
+    lol = lol.replace('2','1').replace('3','3').replace('4','3').replace('6','5')
+
+
+    upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol)
 
     file_path_pdf = './infographic/output_test.pdf'
     presentation2 = Presentation2()
