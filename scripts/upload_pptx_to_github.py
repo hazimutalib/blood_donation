@@ -1,9 +1,10 @@
+import requests
 from pptx import Presentation
 from pptx.util import Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN
-from reportlab.pdfgen import canvas
 from spire.presentation import Presentation as Presentation2, FileFormat
+import base64
 
 
 def set_font_properties(text_frame, font_name, font_size, font_color, is_bold, alignment):
@@ -107,17 +108,46 @@ def edit_powerpoint_template(template_path, output_path):
 
 
 
-# Example usage
-template_path = 'C:/Users/Analyst07/Desktop/govtech/blood_donation.pptx'
-output_path_pptx = 'C:/Users/Analyst07/Desktop/govtech/output.pptx'
+def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token):
+    
 
-edit_powerpoint_template(template_path, output_path_pptx)
-
-
-presentation2 = Presentation2()
-presentation2.LoadFromFile("output.pptx")
-presentation2.SaveToFile("output.pdf", FileFormat.PDF)
-presentation2.Dispose()
+    edit_powerpoint_template(template_path, file_path)
 
 
+    with open(file_path, 'rb') as file:
+        file_content = base64.b64encode(file.read()).decode('utf-8')
 
+
+    api_url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}'
+
+    # Check if the file exists
+    response = requests.get(api_url, headers={'Authorization': f'Token {github_token}'})
+    if response.status_code == 200:
+        # File exists, update it
+        sha = response.json()['sha']
+    else:
+        # File doesn't exist, create it
+        sha = None
+
+    # Create a commit with the updated presentation file
+    commit_message = 'Automated commit: Add/update PowerPoint presentation'
+    commit_data = {
+        'message': commit_message,
+        'content': file_content,
+        'sha': sha  # Include the SHA here
+    }
+
+    response = requests.put(api_url, headers={'Authorization': f'Token {github_token}'}, json=commit_data)
+
+    if response.status_code == 200:
+        print('Presentation file successfully saved to GitHub.')
+    else:
+        print(f'Failed to save presentation file. Status code: {response.status_code}, Message: {response.text}')
+
+
+repo_owner = 'hazimutalib'
+repo_name = 'blood_donation'
+template_path = './blood_donation.pptx'
+file_path = './infographic/output_test.pptx'
+github_token = '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'
+upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token)

@@ -36,11 +36,11 @@ def upload_file_to_github(file_path, repo_owner, repo_name, branch, token):
 
 
 # Set your GitHub repository details and authentication token
-file_path_to_upload = 'C:/Users/Analyst07/Documents/datadna_january/poster.pptx'
+file_path_to_upload = './blood_donation.pptx'
 github_repo_owner = 'hazimutalib'
 github_repo_name = 'blood_donation'
 github_branch = 'main'
-github_token = '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'
+github_token = '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'
 
 # Upload the file
 upload_file_to_github(file_path_to_upload, github_repo_owner, github_repo_name, github_branch, github_token)

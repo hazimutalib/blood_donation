@@ -8,6 +8,7 @@ from dateutil.relativedelta import relativedelta
 from io import BytesIO
 import requests
 from styles.styles import kpi_box_malaysia, kpi_box_1, kpi_box_2, kpi_box_3, kpi_box_4, kpi_box_css, body_css, kpi_box_granular
+from scripts.upload_pptx_to_github import upload_pptx_to_github
 
 from pptx import Presentation
 from pptx.util import Pt
@@ -44,6 +45,9 @@ st.markdown(
     </style>
     """, unsafe_allow_html=True
 )
+
+
+
 
 donations_state_url = "https://raw.githubusercontent.com/MoH-Malaysia/data-darah-public/main/donations_state.csv"
 kpi_box_css()
@@ -102,6 +106,7 @@ def historical_trends(df):
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_xaxes(showticklabels=False)
     column[0].write(fig)
+
 
     fig = px.line(df_new.groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily',
                 width = 360, height = 500, title = 'Time series of blood donors of Malaysia')
@@ -222,5 +227,10 @@ with tab3:
    retention_trends(df)
 
 
-
-
+if st.button('Upload'):
+    repo_owner = 'hazimutalib'
+    repo_name = 'blood_donation'
+    template_path = './blood_donation.pptx'
+    file_path = './infographic/output_test.pptx'
+    github_token = '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'
+    upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token)
