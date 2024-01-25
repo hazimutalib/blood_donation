@@ -19,6 +19,8 @@ def set_font_properties(text_frame, font_name, font_size, font_color, is_bold, a
 
             paragraph.alignment = alignment
 
+
+
 def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
                              negeri_sembilan, terengganu, pahang, kelantan):
     # Load the template presentation
@@ -38,6 +40,10 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
         for shape in slide.shapes:
             if shape.has_text_frame:
                 
+                if "malaysia" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("malaysia", "{:,}".format(malaysia))
+                    set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
+
                 if "perlis" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("perlis", "0")
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
@@ -79,7 +85,7 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
                 
                 if "sarawak" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("sarawak", "128")
+                    shape.text_frame.text = shape.text_frame.text.replace("sarawak", "{:,}".format(sarawak))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "kelantan" in shape.text_frame.text:
@@ -101,6 +107,11 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                 if "johor" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("johor", "{:,}".format(johor))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
+
+                if "date" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("johor", "{:,}".format(johor))
+                    set_font_properties(shape.text_frame, 'Verdana', 11, content_font_color, content_is_bold, content_alignment)
+
 
     # Save the modified presentation
     presentation.save(output_path)
