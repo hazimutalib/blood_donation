@@ -8,7 +8,8 @@ from dateutil.relativedelta import relativedelta
 from io import BytesIO
 import requests
 from styles.styles import kpi_box_malaysia, kpi_box_1, kpi_box_2, kpi_box_3, kpi_box_4, kpi_box_css, body_css, kpi_box_granular, kpi_box_kuala_lumpur, kpi_box_kedah, kpi_box_perak, kpi_box_johor
-
+from styles.styles import kpi_box_kuala_lumpur, kpi_box_kedah, kpi_box_perak, kpi_box_johor, kpi_box_sarawak, kpi_box_pulau_pinang, kpi_box_sabah, kpi_box_melaka
+from styles.styles import kpi_box_selangor, kpi_box_negeri_sembilan, kpi_box_terengganu, kpi_box_pahang, kpi_box_kelantan, kpi_box_perlis, kpi_box_putrajaya, kpi_box_labuan
 from scripts.upload_pptx_to_github import upload_pptx_to_github, upload_pdf_to_github
 import time
 
@@ -139,10 +140,24 @@ def yesterday_trends(df):
     column = st.columns([1,1,1,1])
 
     column[0].markdown(kpi_box_kuala_lumpur(kuala_lumpur.iloc[0]), unsafe_allow_html=True )
-    column[1].markdown(kpi_box_kuala_lumpur(kuala_lumpur.iloc[0]), unsafe_allow_html=True )
-    column[2].markdown(kpi_box_kuala_lumpur(kuala_lumpur.iloc[0]), unsafe_allow_html=True )
-    column[3].markdown(kpi_box_kuala_lumpur(kuala_lumpur.iloc[0]), unsafe_allow_html=True )
+    column[1].markdown(kpi_box_kedah(kedah.iloc[0]), unsafe_allow_html=True )
+    column[2].markdown(kpi_box_perak(perak.iloc[0]), unsafe_allow_html=True )
+    column[3].markdown(kpi_box_johor(johor.iloc[0]), unsafe_allow_html=True )
 
+    column[0].markdown(kpi_box_sarawak(sarawak.iloc[0]), unsafe_allow_html=True )
+    column[1].markdown(kpi_box_pulau_pinang(pulau_pinang.iloc[0]), unsafe_allow_html=True )
+    column[2].markdown(kpi_box_sabah(sabah.iloc[0]), unsafe_allow_html=True )
+    column[3].markdown(kpi_box_melaka(melaka.iloc[0]), unsafe_allow_html=True )
+
+    column[0].markdown(kpi_box_selangor(selangor.iloc[0]), unsafe_allow_html=True )
+    column[1].markdown(kpi_box_negeri_sembilan(negeri_sembilan.iloc[0]), unsafe_allow_html=True )
+    column[2].markdown(kpi_box_terengganu(terengganu.iloc[0]), unsafe_allow_html=True )
+    column[3].markdown(kpi_box_pahang(pahang.iloc[0]), unsafe_allow_html=True )
+
+    column[0].markdown(kpi_box_kelantan(kelantan.iloc[0]), unsafe_allow_html=True )
+    column[1].markdown(kpi_box_perlis(0), unsafe_allow_html=True )
+    column[2].markdown(kpi_box_putrajaya(0), unsafe_allow_html=True )
+    column[3].markdown(kpi_box_labuan(0), unsafe_allow_html=True )
 
     # column[0].kpi_box_kuala_lumpur(kuala_lumpur.iloc[0])
     # column[1].kpi_box_kedah(kedah.iloc[0])

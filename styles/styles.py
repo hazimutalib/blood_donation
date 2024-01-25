@@ -116,7 +116,7 @@ def kpi_box_malaysia(malaysia):
     """.format(malaysia), unsafe_allow_html=True)
 
 def kpi_box_kuala_lumpur(kuala_lumpur):
-     x = """         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://c4.wallpaperflare.com/wallpaper/71/359/733/2000px-flag-kuala-lumpur-malaysia-svg-wallpaper-preview.jpg" alt="kuala lumpur" width = "35" height = "20">
@@ -126,10 +126,10 @@ def kpi_box_kuala_lumpur(kuala_lumpur):
     </div>
     """.format(kuala_lumpur)
      
-     return x
+    return x
      
 def kpi_box_kedah(kedah):
-     st.markdown("""         
+    x = """        
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Flag_of_Kedah.svg" alt="kedah" width = "35" height = "20">
@@ -137,10 +137,12 @@ def kpi_box_kedah(kedah):
             <span class="card-value">{:,}</span>
         </div>
     </div>
-    """.format(kedah), unsafe_allow_html=True)
+    """.format(kedah)
+     
+    return x
 
 def kpi_box_perak(perak):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Flag_of_Perak.svg" alt="perak" width = "35" height = "20">
@@ -148,10 +150,11 @@ def kpi_box_perak(perak):
             <span class="card-value">{:,}</span>
         </div>
     </div>
-    """.format(perak), unsafe_allow_html=True)
+    """.format(perak)
+    return x
 
 def kpi_box_johor(johor):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Flag_of_Johor.svg" alt="johor" width = "35" height = "20">
@@ -159,10 +162,12 @@ def kpi_box_johor(johor):
             <span class="card-value">{:,}</span>
         </div>
     </div>
-    """.format(johor), unsafe_allow_html=True)
+    """.format(johor)
+
+    return x
 
 def kpi_box_sarawak(sarawak):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Flag_of_Sarawak.svg/383px-Flag_of_Sarawak.svg.png" alt="sarawak" width = "35" height = "20">
@@ -170,10 +175,12 @@ def kpi_box_sarawak(sarawak):
             <span class="card-value">{:,}</span>
         </div> 
     </div>
-    """.format(sarawak), unsafe_allow_html=True)
+    """.format(sarawak)
+    
+    return x
         
 def kpi_box_pulau_pinang(pulau_pinang):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Flag_of_Penang_from_xrmap.svg" alt="pulau pinang" width = "35" height = "20">
@@ -181,10 +188,12 @@ def kpi_box_pulau_pinang(pulau_pinang):
             <span class="card-value">{:,}</span>
         </div>
     </div>
-    """.format(pulau_pinang), unsafe_allow_html=True)
+    """.format(pulau_pinang)
+    
+    return x
      
 def kpi_box_sabah(sabah):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Flag_of_Sabah.svg/255px-Flag_of_Sabah.svg.png" alt="sabah" width = "35" height = "20">
@@ -192,11 +201,13 @@ def kpi_box_sabah(sabah):
             <span class="card-value">{:,}</span>
         </div>
     </div>
-    """.format(sabah), unsafe_allow_html=True)
+    """.format(sabah)
+    
+    return x
      
 
 def kpi_box_melaka(melaka):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_Malacca.svg/1200px-Flag_of_Malacca.svg.png" alt="melaka" width = "35" height = "20">
@@ -204,11 +215,13 @@ def kpi_box_melaka(melaka):
             <span class="card-value">{:,}</span>
         </div> 
     </div>
-    """.format(melaka), unsafe_allow_html=True)
+    """.format(melaka)
+    
+    return x
 
 
 def kpi_box_selangor(selangor):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Flag_of_Selangor.svg" alt="selangor" width = "35" height = "20">
@@ -216,10 +229,12 @@ def kpi_box_selangor(selangor):
             <span class="card-value">{:,}</span>      
         </div> 
     </div>
-    """.format(selangor), unsafe_allow_html=True)
+    """.format(selangor)
+    
+    return x
      
 def kpi_box_negeri_sembilan(negeri_sembilan):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Flag_of_Negeri_Sembilan.svg" alt="negeri sembilan" width = "35" height = "20">
@@ -227,10 +242,12 @@ def kpi_box_negeri_sembilan(negeri_sembilan):
             <span class="card-value">{:,}</span>
         </div> 
     </div>
-    """.format(negeri_sembilan), unsafe_allow_html=True)
+    """.format(negeri_sembilan)
+    
+    return x
      
 def kpi_box_terengganu(terengganu):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Flag_of_Terengganu.svg" alt="terengganu" width = "35" height = "20">
@@ -238,10 +255,12 @@ def kpi_box_terengganu(terengganu):
             <span class="card-value">{:,}</span>
         </div>
     </div>
-    """.format(terengganu), unsafe_allow_html=True)
+    """.format(terengganu)
+    
+    return x
      
 def kpi_box_pahang(pahang):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Flag_of_Pahang.svg" alt="pahang" width = "35" height = "20">
@@ -249,10 +268,12 @@ def kpi_box_pahang(pahang):
             <span class="card-value">{:,}</span>
         </div>   
     </div>
-    """.format(pahang), unsafe_allow_html=True)
+    """.format(pahang)
+    
+    return x
 
 def kpi_box_kelantan(kelantan):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Flag_of_Kelantan.svg" alt="kelantan" width = "35" height = "20">
@@ -260,10 +281,12 @@ def kpi_box_kelantan(kelantan):
             <span class="card-value">{:,}</span>
         </div> 
     </div>
-    """.format(kelantan), unsafe_allow_html=True)
+    """.format(kelantan)
+    
+    return x
      
 def kpi_box_perlis(perlis):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Flag_of_Perlis.svg" alt="perlis" width = "35" height = "20">
@@ -271,10 +294,12 @@ def kpi_box_perlis(perlis):
             <span class="card-value">{:,}</span>
         </div>  
     </div>
-    """.format(perlis), unsafe_allow_html=True)
+    """.format(perlis)
+    
+    return x
      
 def kpi_box_putrajaya(putrajaya):
-     st.markdown("""         
+    x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Putrajaya.svg" alt="putrajaya" width = "35" height = "20">
@@ -282,10 +307,13 @@ def kpi_box_putrajaya(putrajaya):
             <span class="card-value">{:,}</span>
         </div>   
     </div>
-    """.format(putrajaya), unsafe_allow_html=True)
-     
+    """.format(putrajaya)
+    
+    return x
+
+
 def kpi_box_labuan(labuan):
-     st.markdown("""         
+    x  = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Flag_of_Labuan.svg" alt="labuan" width = "35" height = "20">
@@ -293,7 +321,9 @@ def kpi_box_labuan(labuan):
             <span class="card-value">{:,}</span>
         </div>    
     </div>
-    """.format(labuan), unsafe_allow_html=True)
+    """.format(labuan)
+
+    return x
      
 
 
