@@ -125,11 +125,11 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
 
 
 def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
-                             negeri_sembilan, terengganu, pahang, kelantan):
+                             negeri_sembilan, terengganu, pahang, kelantan, max_date):
     
 
     edit_powerpoint_template(template_path, file_path, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
-                             negeri_sembilan, terengganu, pahang, kelantan)
+                             negeri_sembilan, terengganu, pahang, kelantan, max_date)
 
 
     with open(file_path, 'rb') as file:
