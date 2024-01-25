@@ -7,18 +7,13 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from io import BytesIO
 import requests
-from styles.styles import kpi_box_malaysia, kpi_box_1, kpi_box_2, kpi_box_3, kpi_box_4, kpi_box_css, body_css, kpi_box_granular, kpi_box_kuala_lumpur, kpi_box_kedah, kpi_box_perak, kpi_box_johor
+from styles.styles import kpi_box_malaysia, kpi_box_css, body_css, kpi_box_granular
 from styles.styles import kpi_box_kuala_lumpur, kpi_box_kedah, kpi_box_perak, kpi_box_johor, kpi_box_sarawak, kpi_box_pulau_pinang, kpi_box_sabah, kpi_box_melaka
 from styles.styles import kpi_box_selangor, kpi_box_negeri_sembilan, kpi_box_terengganu, kpi_box_pahang, kpi_box_kelantan, kpi_box_perlis, kpi_box_putrajaya, kpi_box_labuan
 from scripts.upload_pptx_to_github import upload_pptx_to_github, upload_pdf_to_github
 import time
-
-from pptx import Presentation
-from pptx.util import Pt
-from pptx.dml.color import RGBColor
-from pptx.enum.text import PP_ALIGN
 from spire.presentation import Presentation as Presentation2, FileFormat
-# from spire.presentation.exporting import PDFConverter
+
 
 st.set_page_config(layout="wide")
 
@@ -37,32 +32,33 @@ st.markdown(
 )
 
 
-
-
 donations_state_url = "https://raw.githubusercontent.com/MoH-Malaysia/data-darah-public/main/donations_state.csv"
 kpi_box_css()
 df = pd.read_csv(donations_state_url)
 df = df[df.date > '2011-12-31']
 df.date = pd.to_datetime(df.date).dt.date
+df['year'] = df['date'].astype('str').apply(lambda x: x[:4])
 
 
 
 def historical_trends(df):
-    
+    df = df[df.year != '2024']
     column = st.columns([1,1,1])
     state = column[0].multiselect('State:', df[df.state != 'Malaysia'].state.unique())
     date = column[1].date_input('Range of date:', value = (min(df.date), max(df.date)))
 
     st.write("""###### Data is updated as of {}""".format(max(df.date)))
 
-    if date[0] != min(df.date):
-        try:
-            st.write("""### Malaysia's Blood Donation Trends from {} to {}""".format(date[0], date[0]))
-        except:
-            st.write("""### Malaysia's Blood Donation Trends from {} to {}""".format(date[0], date[1]))
-    else:
-        st.write("""### Malaysia's Blood Donation Trends from 2012 to 2024""".format(max(df.date)))
-
+    # if date[0] != min(df.date):
+    #     try:
+    #         st.write("""### Malaysia's Blood Donation Trends from {} to {}""".format(date[0], date[0]))
+    #     except:
+    #         st.write("""### Malaysia's Blood Donation Trends from {} to {}""".format(date[0], date[1]))
+    # else:
+    #     st.write("""### Malaysia's Blood Donation Trends from 2012 to 2024""".format(max(df.date)))
+    
+    st.write("""### Malaysia's Blood Donation Trends from 2012 to 2023""")
+    
     df_new = df
 
     if not state:
@@ -98,7 +94,7 @@ def historical_trends(df):
     column[0].write(fig)
 
 
-    fig = px.line(df_new.groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily',
+    fig = px.line(df_new.groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily',
                 width = 360, height = 500, title = 'Time series of blood donors of Malaysia')
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
@@ -107,7 +103,7 @@ def historical_trends(df):
     column[2].write(fig)
 
 
-    fig = px.line(df[(df.state != 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', color = 'state',
+    fig = px.line(df[(df.state != 'Malaysia')].groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily', color = 'state',
                 width = 360, height = 500, title = 'Time series of blood donors across state')
     # fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
@@ -118,7 +114,12 @@ def historical_trends(df):
 
 
 def yesterday_trends(df):
-    st.write("""### Malaysia's Blood Donation Count on {}""".format(max(df.date)))
+    column = st.columns([9,1])
+    column[0].write("""### Malaysia's Blood Donation Daily Updates (2024)""")
+    column[1].write("""###### Data as of {}""".format(max(df.date)))
+    column[0].write(""" The metrics shown in the boxes below represent the blood donation counts on {}""".format(max(df.date)))
+
+    df = df[df.year == '2024']
     malaysia = df[(df.date == df.date.max()) & (df.state == "Malaysia")].daily
     kedah = df[(df.date == df.date.max()) & (df.state == "Kedah")].daily
     pulau_pinang = df[(df.date == df.date.max()) & (df.state == "Pulau Pinang")].daily
@@ -126,7 +127,6 @@ def yesterday_trends(df):
     selangor = df[(df.date == df.date.max()) & (df.state == "Selangor")].daily
     kuala_lumpur = df[(df.date == df.date.max()) & (df.state == "W.P. Kuala Lumpur")].daily
     negeri_sembilan = df[(df.date == df.date.max()) & (df.state == "Negeri Sembilan")].daily
-    putrajaya = df[(df.date == df.date.max()) & (df.state == "W.P. Putrajaya")].daily
     sabah = df[(df.date == df.date.max()) & (df.state == "Sabah")].daily
     sarawak = df[(df.date == df.date.max()) & (df.state == "Sarawak")].daily
     kelantan = df[(df.date == df.date.max()) & (df.state == "Kelantan")].daily
@@ -159,16 +159,26 @@ def yesterday_trends(df):
     column[2].markdown(kpi_box_putrajaya(0), unsafe_allow_html=True )
     column[3].markdown(kpi_box_labuan(0), unsafe_allow_html=True )
 
-    # column[0].kpi_box_kuala_lumpur(kuala_lumpur.iloc[0])
-    # column[1].kpi_box_kedah(kedah.iloc[0])
-    # column[2].kpi_box_perak(perak.iloc[0])
-    # column[3].kpi_box_johor(johor.iloc[0])
+    st.write("""#  """)
+    column = st.columns([4,1,4])
+
+    fig = px.line(df[(df.state == 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', title = 'Time series of blood donors of Malaysia (YTD)')
+    fig.update_traces(showlegend = False)
+    fig.update_layout(yaxis_title=None)
+    fig.update_layout(xaxis_title=None)
+    fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
+    column[0].write(fig)
 
 
-    # kpi_box_1(kuala_lumpur.iloc[0], kedah.iloc[0], perak.iloc[0], johor.iloc[0])
-    # kpi_box_2(sarawak.iloc[0], pulau_pinang.iloc[0], sabah.iloc[0], melaka.iloc[0])
-    # kpi_box_3(selangor.iloc[0], negeri_sembilan.iloc[0], terengganu.iloc[0], pahang.iloc[0])
-    # kpi_box_4(kelantan.iloc[0], 0, 0, 0)
+    fig = px.line(df[(df.state != 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', color = 'state',
+                 title = 'Time series of blood donors across state (YTD)')
+    # fig.update_traces(showlegend = False)
+    fig.update_layout(yaxis_title=None)
+    fig.update_layout(xaxis_title=None)
+    fig.update_layout(plot_bgcolor='white', paper_bgcolor = 'white')
+    
+    column[2].write(fig)
+
 
 
 
