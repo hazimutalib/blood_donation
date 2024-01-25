@@ -160,25 +160,25 @@ def yesterday_trends(df):
     column[3].markdown(kpi_box_labuan(0), unsafe_allow_html=True )
 
     st.write("""#  """)
-    column = st.columns([4,1,4])
+    column = st.columns([1,4,1,4,1])
 
     fig = px.line(df[(df.state == 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', 
-                  width = 400 , title = 'Time series of blood donors of Malaysia (YTD)')
+                  width = 540 , title = 'Time series of blood donors of Malaysia (YTD)')
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
-    column[0].write(fig)
+    column[1].write(fig)
 
 
     fig = px.line(df[(df.state != 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', color = 'state',
-                 width = 400, title = 'Time series of blood donors across state (YTD)')
+                 width = 540, title = 'Time series of blood donors across state (YTD)')
     # fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor='white', paper_bgcolor = 'white')
     
-    column[2].write(fig)
+    column[3].write(fig)
 
 
 
