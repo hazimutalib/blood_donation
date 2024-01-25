@@ -43,73 +43,48 @@ df['year'] = df['date'].astype('str').apply(lambda x: x[:4])
 
 def historical_trends(df):
     df = df[df.year != '2024']
-    column = st.columns([1,1,1])
-    state = column[0].multiselect('State:', df[df.state != 'Malaysia'].state.unique())
-    date = column[1].date_input('Range of date:', value = (min(df.date), max(df.date)))
 
-    st.write("""###### Data is updated as of {}""".format(max(df.date)))
+    column = st.columns([9,1])
+    column[0].write("""### Malaysia's Blood Donation Trends from 2012 to 2023""")
+    column[1].write("""###### Data as of {}""".format(max(df.date)))
 
-    # if date[0] != min(df.date):
-    #     try:
-    #         st.write("""### Malaysia's Blood Donation Trends from {} to {}""".format(date[0], date[0]))
-    #     except:
-    #         st.write("""### Malaysia's Blood Donation Trends from {} to {}""".format(date[0], date[1]))
-    # else:
-    #     st.write("""### Malaysia's Blood Donation Trends from 2012 to 2024""".format(max(df.date)))
-    
-    st.write("""### Malaysia's Blood Donation Trends from 2012 to 2023""")
-    
-    df_new = df
 
-    if not state:
-        df = df
-        df_new = df_new[(df_new.state == "Malaysia")]
-    else: 
-        df = df[df.state.isin(state)]
-        df_new = df_new[df_new.state.isin(state)]
-
-    try:
-        df = df[(df.date >= date[0]) & (df.date <= date[1])]
-        df_new = df_new[(df_new.date >= date[0]) & (df_new.date <= date[1])]
-        
-    except:
-        df = df
-        df_new = df_new
-        
-
-    malaysia_sum = df_new.daily.sum()
+    malaysia_sum = df[df.state == 'Malaysia'].daily.sum()
 
     kpi_box_malaysia(malaysia_sum)
 
-    column = st.columns([5,1,5,1,5])
+    column = st.columns([1,4,1,4,1])
 
-    fig = px.bar(df[df.state != 'Malaysia'].groupby('state')['daily'].sum(), orientation='h', text_auto='.2s', width = 360, height = 500, 
-                title = 'Blood donors by state',)
+    fig = px.line(df[df.state == 'Malaysia'].groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily',
+                width = 540, height = 540, title = 'Count of blood donors by year across Malaysia (2012-2023)')
+    fig.update_traces(showlegend = False)
+    fig.update_layout(yaxis_title=None)
+    fig.update_layout(xaxis_title=None)
+    fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
+    column[1].write(fig)
+
+    fig = px.bar(df[df.state != 'Malaysia'].groupby('state')['daily'].sum(), orientation='h', text_auto='.2s', width = 540, height = 540, 
+                title = 'Cumulative count of blood donors by state (2012-2023)',)
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(yaxis = {"categoryorder":"total ascending"})
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_xaxes(showticklabels=False)
-    column[0].write(fig)
+    column[3].write(fig)
 
 
-    fig = px.line(df_new.groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily',
-                width = 360, height = 500, title = 'Time series of blood donors of Malaysia')
-    fig.update_traces(showlegend = False)
-    fig.update_layout(yaxis_title=None)
-    fig.update_layout(xaxis_title=None)
-    fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
-    column[2].write(fig)
+    
+    column[1].write("""# """)
 
-
+    column = st.columns([3,4,3])
     fig = px.line(df[(df.state != 'Malaysia')].groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily', color = 'state',
-                width = 360, height = 500, title = 'Time series of blood donors across state')
+                 height = 540, title = 'Count of blood donors by year across state of Malaysia (2012-2023)')
     # fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor='white', paper_bgcolor = 'white')
-    column[4].write(fig)
+    column[1].write(fig)
 
 
 
@@ -117,7 +92,6 @@ def yesterday_trends(df):
     column = st.columns([9,1])
     column[0].write("""### Malaysia's Blood Donation Daily Updates (2024)""")
     column[1].write("""###### Data as of {}""".format(max(df.date)))
-    column[0].write(""" The metrics shown in the boxes below represent the blood donation counts on {}""".format(max(df.date)))
 
     df = df[df.year == '2024']
     malaysia = df[(df.date == df.date.max()) & (df.state == "Malaysia")].daily
@@ -135,35 +109,80 @@ def yesterday_trends(df):
     melaka = df[(df.date == df.date.max()) & (df.state == "Melaka")].daily
     johor = df[(df.date == df.date.max()) & (df.state == "Johor")].daily
 
+    malaysia_total = df[(df.state == "Malaysia")].daily.sum()
+    kedah_total = df[(df.state == "Kedah")].daily.sum()
+    pulau_pinang_total = df[(df.state == "Pulau Pinang")].daily.sum()
+    perak_total = df[(df.state == "Perak")].daily.sum()
+    selangor_total = df[(df.state == "Selangor")].daily.sum()
+    kuala_lumpur_total = df[(df.state == "W.P. Kuala Lumpur")].daily.sum()
+    negeri_sembilan_total = df[(df.state == "Negeri Sembilan")].daily.sum()
+    sabah_total = df[(df.state == "Sabah")].daily.sum()
+    sarawak_total = df[(df.state == "Sarawak")].daily.sum()
+    kelantan_total = df[(df.state == "Kelantan")].daily.sum()
+    terengganu_total= df[(df.state == "Terengganu")].daily.sum()
+    pahang_total = df[(df.state == "Pahang")].daily.sum()
+    melaka_total = df[(df.state == "Melaka")].daily.sum()
+    johor_total = df[(df.state == "Johor")].daily.sum()
 
-    kpi_box_malaysia(malaysia.iloc[0])
-    column = st.columns([1,1,1,1])
+    
 
-    column[0].markdown(kpi_box_kuala_lumpur(kuala_lumpur.iloc[0]), unsafe_allow_html=True )
-    column[1].markdown(kpi_box_kedah(kedah.iloc[0]), unsafe_allow_html=True )
-    column[2].markdown(kpi_box_perak(perak.iloc[0]), unsafe_allow_html=True )
-    column[3].markdown(kpi_box_johor(johor.iloc[0]), unsafe_allow_html=True )
+    
+    tab1, tab2 = st.tabs(["Cumulative count of blood donations", "Yesterday count of blood donations"])
 
-    column[0].markdown(kpi_box_sarawak(sarawak.iloc[0]), unsafe_allow_html=True )
-    column[1].markdown(kpi_box_pulau_pinang(pulau_pinang.iloc[0]), unsafe_allow_html=True )
-    column[2].markdown(kpi_box_sabah(sabah.iloc[0]), unsafe_allow_html=True )
-    column[3].markdown(kpi_box_melaka(melaka.iloc[0]), unsafe_allow_html=True )
+    with tab1:
 
-    column[0].markdown(kpi_box_selangor(selangor.iloc[0]), unsafe_allow_html=True )
-    column[1].markdown(kpi_box_negeri_sembilan(negeri_sembilan.iloc[0]), unsafe_allow_html=True )
-    column[2].markdown(kpi_box_terengganu(terengganu.iloc[0]), unsafe_allow_html=True )
-    column[3].markdown(kpi_box_pahang(pahang.iloc[0]), unsafe_allow_html=True )
+        kpi_box_malaysia(malaysia_total)
+        column = st.columns([1,1,1,1])
+        column[0].markdown(kpi_box_kuala_lumpur(kuala_lumpur_total), unsafe_allow_html=True )
+        column[1].markdown(kpi_box_kedah(kedah_total), unsafe_allow_html=True )
+        column[2].markdown(kpi_box_perak(perak_total), unsafe_allow_html=True )
+        column[3].markdown(kpi_box_johor(johor_total), unsafe_allow_html=True )
 
-    column[0].markdown(kpi_box_kelantan(kelantan.iloc[0]), unsafe_allow_html=True )
-    column[1].markdown(kpi_box_perlis(0), unsafe_allow_html=True )
-    column[2].markdown(kpi_box_putrajaya(0), unsafe_allow_html=True )
-    column[3].markdown(kpi_box_labuan(0), unsafe_allow_html=True )
+        column[0].markdown(kpi_box_sarawak(sarawak_total), unsafe_allow_html=True )
+        column[1].markdown(kpi_box_pulau_pinang(pulau_pinang_total), unsafe_allow_html=True )
+        column[2].markdown(kpi_box_sabah(sabah_total), unsafe_allow_html=True )
+        column[3].markdown(kpi_box_melaka(melaka_total), unsafe_allow_html=True )
 
+        column[0].markdown(kpi_box_selangor(selangor_total), unsafe_allow_html=True )
+        column[1].markdown(kpi_box_negeri_sembilan(negeri_sembilan_total), unsafe_allow_html=True )
+        column[2].markdown(kpi_box_terengganu(terengganu_total), unsafe_allow_html=True )
+        column[3].markdown(kpi_box_pahang(pahang_total), unsafe_allow_html=True )
+
+        column[0].markdown(kpi_box_kelantan(kelantan_total), unsafe_allow_html=True )
+        column[1].markdown(kpi_box_perlis(0), unsafe_allow_html=True )
+        column[2].markdown(kpi_box_putrajaya(0), unsafe_allow_html=True )
+        column[3].markdown(kpi_box_labuan(0), unsafe_allow_html=True )
+
+
+    with tab2:
+        kpi_box_malaysia(malaysia.iloc[0])
+        column = st.columns([1,1,1,1])
+        column[0].markdown(kpi_box_kuala_lumpur(kuala_lumpur.iloc[0]), unsafe_allow_html=True )
+        column[1].markdown(kpi_box_kedah(kedah.iloc[0]), unsafe_allow_html=True )
+        column[2].markdown(kpi_box_perak(perak.iloc[0]), unsafe_allow_html=True )
+        column[3].markdown(kpi_box_johor(johor.iloc[0]), unsafe_allow_html=True )
+
+        column[0].markdown(kpi_box_sarawak(sarawak.iloc[0]), unsafe_allow_html=True )
+        column[1].markdown(kpi_box_pulau_pinang(pulau_pinang.iloc[0]), unsafe_allow_html=True )
+        column[2].markdown(kpi_box_sabah(sabah.iloc[0]), unsafe_allow_html=True )
+        column[3].markdown(kpi_box_melaka(melaka.iloc[0]), unsafe_allow_html=True )
+
+        column[0].markdown(kpi_box_selangor(selangor.iloc[0]), unsafe_allow_html=True )
+        column[1].markdown(kpi_box_negeri_sembilan(negeri_sembilan.iloc[0]), unsafe_allow_html=True )
+        column[2].markdown(kpi_box_terengganu(terengganu.iloc[0]), unsafe_allow_html=True )
+        column[3].markdown(kpi_box_pahang(pahang.iloc[0]), unsafe_allow_html=True )
+
+        column[0].markdown(kpi_box_kelantan(kelantan.iloc[0]), unsafe_allow_html=True )
+        column[1].markdown(kpi_box_perlis(0), unsafe_allow_html=True )
+        column[2].markdown(kpi_box_putrajaya(0), unsafe_allow_html=True )
+        column[3].markdown(kpi_box_labuan(0), unsafe_allow_html=True )
+
+    
     st.write("""#  """)
     column = st.columns([1,4,1,4,1])
 
     fig = px.line(df[(df.state == 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', 
-                  width = 520 , title = 'Time series of blood donors of Malaysia (YTD)')
+                  width = 540 , title = 'Time series of blood donors of Malaysia (YTD)')
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
@@ -172,7 +191,7 @@ def yesterday_trends(df):
 
 
     fig = px.line(df[(df.state != 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', color = 'state',
-                 width = 520, title = 'Time series of blood donors across state (YTD)')
+                 width = 540, title = 'Time series of blood donors across state (YTD)')
     # fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
