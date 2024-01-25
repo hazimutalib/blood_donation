@@ -8,7 +8,7 @@ from dateutil.relativedelta import relativedelta
 from io import BytesIO
 import requests
 from styles.styles import kpi_box_malaysia, kpi_box_1, kpi_box_2, kpi_box_3, kpi_box_4, kpi_box_css, body_css, kpi_box_granular
-from scripts.upload_pptx_to_github import upload_pptx_to_github
+from scripts.upload_pptx_to_github import upload_pptx_to_github, upload_pdf_to_github
 import time
 
 from pptx import Presentation
@@ -16,6 +16,7 @@ from pptx.util import Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN
 from spire.presentation import Presentation as Presentation2, FileFormat
+# from spire.presentation.exporting import PDFConverter
 
 st.set_page_config(layout="wide")
 
@@ -225,7 +226,7 @@ if st.button('Upload'):
 
 
     upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol)
-
+    
     time.sleep(5)
 
     file_path_pdf = './infographic/output_test.pdf'
@@ -234,4 +235,6 @@ if st.button('Upload'):
     presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
     presentation2.Dispose()
 
-    upload_pptx_to_github(repo_owner, repo_name, template_path, file_path_pdf, lol)
+    # PDFConverter().convert(presentation2, file_path_pdf)
+    upload_pdf_to_github(file_path_pdf, lol, repo_owner, repo_name)
+    # upload_pptx_to_github(repo_owner, repo_name, template_path, file_path_pdf, lol)

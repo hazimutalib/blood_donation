@@ -145,6 +145,47 @@ def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, githu
         print(f'Failed to save presentation file. Status code: {response.status_code}, Message: {response.text}')
 
 
+
+def upload_pdf_to_github(pdf_file_path, github_token, repo_owner, repo_name):
+    # Set up the API endpoint
+    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{pdf_file_path}'
+
+    # Read the PDF file content
+    with open(pdf_file_path, 'rb') as pdf_file:
+        pdf_content = pdf_file.read()
+
+    # Create the API payload
+    payload = {
+        'content': pdf_content,
+    }
+
+    # Set the Authorization header with the GitHub token
+    headers = {
+        'Authorization': f'token {github_token}',
+    }
+
+    # Make the API request to create or update the file
+    response = requests.put(url, json=payload, headers=headers)
+
+    if response.status_code == 201:
+        print(f'PDF file {pdf_file_path} successfully uploaded to GitHub.')
+    else:
+        print(f'Failed to upload PDF file. Status code: {response.status_code}\nResponse content: {response.text}')
+
+
+
+
+
+
+# pdf_file_path = "path/to/your/pdf_file.pdf"
+# github_token = "your_github_token"
+# repo_owner = "your_username_or_organization"
+# repo_name = "your_repository_name"
+
+# upload_pdf_to_github(pdf_file_path, github_token, repo_owner, repo_name)
+
+
+
 # repo_owner = 'hazimutalib'
 # repo_name = 'blood_donation'
 # template_path = './blood_donation.pptx'
