@@ -50,8 +50,7 @@ def kpi_box_css():
     padding-bottom: 0.5em;
     border-radius: 0.3em;
     font-family: sans-serif;  
-    width: 11.25em;
-    min-width: 11.25em;
+    min-width: 10.75em;
     margin-right: 0em;
     margin-bottom: 30px;
     }

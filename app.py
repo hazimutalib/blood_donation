@@ -15,7 +15,9 @@ import time
 from spire.presentation import Presentation as Presentation2, FileFormat
 
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="centered")
+
+
 
 body_css()
 
@@ -44,26 +46,29 @@ df['year'] = df['date'].astype('str').apply(lambda x: x[:4])
 def historical_trends(df):
     df = df[df.year != '2024']
 
-    column = st.columns([9,1])
+    column = st.columns([3,1])
     column[0].write("""### Malaysia's Blood Donation Trends from 2012 to 2023""")
-    column[1].write("""###### Data as of {}""".format(max(df.date)))
+    column[1].write("""  """)
+    column[1].write("""  Data as of {}""".format(max(df.date)))
 
 
     malaysia_sum = df[df.state == 'Malaysia'].daily.sum()
 
     kpi_box_malaysia(malaysia_sum)
 
-    column = st.columns([1,4,1,4,1])
+
 
     fig = px.line(df[df.state == 'Malaysia'].groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily',
-                width = 540, height = 540, title = 'Count of blood donors by year across Malaysia (2012-2023)')
+                 height = 540, title = 'Count of blood donors by year across Malaysia (2012-2023)')
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     st.write(fig)
 
-    fig = px.bar(df[df.state != 'Malaysia'].groupby('state')['daily'].sum(), orientation='h', text_auto='.2s', width = 540, height = 540, 
+    st.write("""# """)
+
+    fig = px.bar(df[df.state != 'Malaysia'].groupby('state')['daily'].sum(), orientation='h', text_auto='.2s',  height = 540, 
                 title = 'Cumulative count of blood donors by state (2012-2023)',)
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
@@ -72,12 +77,10 @@ def historical_trends(df):
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_xaxes(showticklabels=False)
     st.write(fig)
-
-
     
-    column[1].write("""# """)
+    st.write("""# """)
 
-    column = st.columns([3,4,3])
+
     fig = px.line(df[(df.state != 'Malaysia')].groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily', color = 'state',
                  height = 540, title = 'Count of blood donors by year across state of Malaysia (2012-2023)')
     # fig.update_traces(showlegend = False)
@@ -89,9 +92,10 @@ def historical_trends(df):
 
 
 def yesterday_trends(df):
-    column = st.columns([9,1])
+    column = st.columns([3,1])
     column[0].write("""### Malaysia's Blood Donation Daily Updates (2024)""")
-    column[1].write("""###### Data as of {}""".format(max(df.date)))
+    column[1].write(""" """)
+    column[1].write(""" Data as of {}""".format(max(df.date)))
 
     df = df[df.year == '2024']
     malaysia = df[(df.date == df.date.max()) & (df.state == "Malaysia")].daily
@@ -179,25 +183,25 @@ def yesterday_trends(df):
 
     
     st.write("""#  """)
-    column = st.columns([1,4,1,4,1])
 
     fig = px.line(df[(df.state == 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', 
-                  width = 540 , title = 'Time series of blood donors of Malaysia (YTD)')
+                   title = 'Time series of blood donors of Malaysia (YTD)')
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
-    column[1].write(fig)
+    st.write(fig)
 
+    st.write("""#  """)
 
     fig = px.line(df[(df.state != 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', color = 'state',
-                 width = 540, title = 'Time series of blood donors across state (YTD)')
+                  title = 'Time series of blood donors across state (YTD)')
     # fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor='white', paper_bgcolor = 'white')
     
-    column[3].write(fig)
+    st.write(fig)
 
 
 
