@@ -220,7 +220,7 @@ if st.button('Upload'):
     file_path = './infographic/output_test.pptx'
     lol = 'ghp_XQuAk8BlOgV2PNLwq3qWbuMG0DwuQI46YKk0'
     
-    lol = lol.replace('2','1').replace('3','3').replace('4','3').replace('6','5')
+    lol = lol.replace('2','1').replace('3','2').replace('4','3').replace('6','5')
 
 
     upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol)
