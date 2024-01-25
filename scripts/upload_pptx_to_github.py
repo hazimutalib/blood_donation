@@ -151,3 +151,11 @@ template_path = './blood_donation.pptx'
 file_path = './infographic/output_test.pptx'
 github_token = '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'
 upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token)
+
+file_path_pdf = './infographic/output_test.pdf'
+presentation2 = Presentation2()
+presentation2.LoadFromFile(file_path)
+presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
+# presentation2.Dispose()
+
+upload_pptx_to_github(repo_owner, repo_name, template_path, file_path_pdf, github_token)
