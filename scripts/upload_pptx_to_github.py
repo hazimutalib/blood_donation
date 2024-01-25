@@ -22,7 +22,7 @@ def set_font_properties(text_frame, font_name, font_size, font_color, is_bold, a
 
 
 def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
-                             negeri_sembilan, terengganu, pahang, kelantan):
+                             negeri_sembilan, terengganu, pahang, kelantan, max_date):
     # Load the template presentation
     presentation = Presentation(template_path)
 
@@ -109,8 +109,12 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "date" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("date", "{:,}".format(johor))
-                    set_font_properties(shape.text_frame, 'Verdana', 11, content_font_color, content_is_bold, content_alignment)
+                    shape.text_frame.text = shape.text_frame.text.replace("date", "{}".format(max_date))
+                    set_font_properties(shape.text_frame, 'Verdana', 16, content_font_color, content_is_bold, content_alignment)
+
+                if "count" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("count", "{}".format(max_date))
+                    set_font_properties(shape.text_frame, 'Verdana', 46, content_font_color, content_is_bold, content_alignment)
 
 
     # Save the modified presentation

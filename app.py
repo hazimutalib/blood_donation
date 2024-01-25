@@ -215,7 +215,7 @@ def yesterday_trends(df):
 
         upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol, malaysia_total, kuala_lumpur_total, kedah_total, 
                               perak_total, johor_total, sarawak_total, pulau_pinang_total, sabah_total, melaka_total, selangor_total, 
-                             negeri_sembilan_total, terengganu_total, pahang_total, kelantan_total)
+                             negeri_sembilan_total, terengganu_total, pahang_total, kelantan_total, max(df.date))
         
         time.sleep(5)
 
