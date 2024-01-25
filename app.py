@@ -203,6 +203,30 @@ def yesterday_trends(df):
     
     st.write(fig)
 
+    if st.button('Upload'):
+        repo_owner = 'hazimutalib'
+        repo_name = 'blood_donation'
+        template_path = './blood_donation.pptx'
+        file_path = './infographic/blood_donation{}.pptx'.format(max(df.date))
+        lol = 'ghp_XQuAk8BlOgV2PNLwq3qWbuMG0DwuQI46YKk0'
+        
+        lol = lol.replace('2','1').replace('3','2').replace('4','3').replace('6','5')
+
+
+        upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol, malaysia_total, kuala_lumpur_total, kedah_total, 
+                              perak_total, johor_total, sarawak_total, pulau_pinang_total, sabah_total, melaka_total, selangor_total, 
+                             negeri_sembilan_total, terengganu_total, pahang_total, kelantan_total)
+        
+        time.sleep(5)
+
+        file_path_pdf = './infographic/blood_donation{}.pptx'.format(max(df.date))
+        presentation2 = Presentation2()
+        presentation2.LoadFromFile(file_path)
+        presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
+        presentation2.Dispose()
+        upload_pdf_to_github(file_path_pdf, lol, repo_owner, repo_name)
+
+
 
 
 
@@ -257,26 +281,4 @@ with tab3:
    retention_trends(df)
 
 
-if st.button('Upload'):
-    repo_owner = 'hazimutalib'
-    repo_name = 'blood_donation'
-    template_path = './blood_donation.pptx'
-    file_path = './infographic/output_test.pptx'
-    lol = 'ghp_XQuAk8BlOgV2PNLwq3qWbuMG0DwuQI46YKk0'
-    
-    lol = lol.replace('2','1').replace('3','2').replace('4','3').replace('6','5')
 
-
-    upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol)
-    
-    time.sleep(5)
-
-    file_path_pdf = './infographic/output_test.pdf'
-    presentation2 = Presentation2()
-    presentation2.LoadFromFile(file_path)
-    presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
-    presentation2.Dispose()
-
-    # PDFConverter().convert(presentation2, file_path_pdf)
-    upload_pdf_to_github(file_path_pdf, lol, repo_owner, repo_name)
-    # upload_pptx_to_github(repo_owner, repo_name, template_path, file_path_pdf, lol)

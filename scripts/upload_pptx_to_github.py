@@ -19,7 +19,8 @@ def set_font_properties(text_frame, font_name, font_size, font_color, is_bold, a
 
             paragraph.alignment = alignment
 
-def edit_powerpoint_template(template_path, output_path):
+def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
+                             negeri_sembilan, terengganu, pahang, kelantan):
     # Load the template presentation
     presentation = Presentation(template_path)
 
@@ -38,43 +39,43 @@ def edit_powerpoint_template(template_path, output_path):
             if shape.has_text_frame:
                 
                 if "perlis" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("perlis", "")
+                    shape.text_frame.text = shape.text_frame.text.replace("perlis", "0")
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "kedah" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("kedah", "67")
+                    shape.text_frame.text = shape.text_frame.text.replace("kedah", "{:,}".format(kedah))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
                 
                 if "pulau pinang" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("pulau pinang", "122")
+                    shape.text_frame.text = shape.text_frame.text.replace("pulau pinang", "{:,}".format(pulau_pinang))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "perak" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("perak", "78")
+                    shape.text_frame.text = shape.text_frame.text.replace("perak", "{:,}".format(perak))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "selangor" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("selangor", "74")
+                    shape.text_frame.text = shape.text_frame.text.replace("selangor", "{:,}".format(selangor))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "kuala lumpur" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("kuala lumpur", "515")
+                    shape.text_frame.text = shape.text_frame.text.replace("kuala lumpur", "{:,}".format(kuala_lumpur))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "putrajaya" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("putrajaya", "122")
+                    shape.text_frame.text = shape.text_frame.text.replace("putrajaya", "0")
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "n. sembilan" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("n. sembilan", "20")
+                    shape.text_frame.text = shape.text_frame.text.replace("n. sembilan", "{:,}".format(negeri_sembilan))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
                 
                 if "sabah" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("sabah", "92")
+                    shape.text_frame.text = shape.text_frame.text.replace("sabah", "{:,}".format(sabah))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "labuan" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("labuan", "")
+                    shape.text_frame.text = shape.text_frame.text.replace("labuan", "0")
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
                 
                 if "sarawak" in shape.text_frame.text:
@@ -82,23 +83,23 @@ def edit_powerpoint_template(template_path, output_path):
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "kelantan" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("kelantan", "67")
+                    shape.text_frame.text = shape.text_frame.text.replace("kelantan", "{:,}".format(kelantan))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "terengganu" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("terengganu", "61")
+                    shape.text_frame.text = shape.text_frame.text.replace("terengganu", "{:,}".format(terengganu))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "pahang" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("pahang", "56")
+                    shape.text_frame.text = shape.text_frame.text.replace("pahang", "{:,}".format(pahang))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "melaka" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("melaka", "100")
+                    shape.text_frame.text = shape.text_frame.text.replace("melaka", "{:,}".format(melaka))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "johor" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("johor", "87")
+                    shape.text_frame.text = shape.text_frame.text.replace("johor", "{:,}".format(johor))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
     # Save the modified presentation
@@ -108,10 +109,12 @@ def edit_powerpoint_template(template_path, output_path):
 
 
 
-def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token):
+def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
+                             negeri_sembilan, terengganu, pahang, kelantan):
     
 
-    edit_powerpoint_template(template_path, file_path)
+    edit_powerpoint_template(template_path, file_path, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
+                             negeri_sembilan, terengganu, pahang, kelantan)
 
 
     with open(file_path, 'rb') as file:
