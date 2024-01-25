@@ -207,7 +207,7 @@ def yesterday_trends(df):
         repo_owner = 'hazimutalib'
         repo_name = 'blood_donation'
         template_path = './blood_donation.pptx'
-        file_path = './infographic/blood_donation{}.pptx'.format(max(df.date))
+        file_path = './infographic/blood_donation_{}.pptx'.format(max(df.date))
         lol = 'ghp_XQuAk8BlOgV2PNLwq3qWbuMG0DwuQI46YKk0'
         
         lol = lol.replace('2','1').replace('3','2').replace('4','3').replace('6','5')
@@ -219,7 +219,7 @@ def yesterday_trends(df):
         
         time.sleep(5)
 
-        file_path_pdf = './infographic/blood_donation{}.pptx'.format(max(df.date))
+        file_path_pdf = './infographic/blood_donation_{}.pdf'.format(max(df.date))
         presentation2 = Presentation2()
         presentation2.LoadFromFile(file_path)
         presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
