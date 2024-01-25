@@ -7,7 +7,8 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from io import BytesIO
 import requests
-from styles.styles import kpi_box_malaysia, kpi_box_1, kpi_box_2, kpi_box_3, kpi_box_4, kpi_box_css, body_css, kpi_box_granular
+from styles.styles import kpi_box_malaysia, kpi_box_1, kpi_box_2, kpi_box_3, kpi_box_4, kpi_box_css, body_css, kpi_box_granular, 
+from styles.styles import kpi_box_kuala_lumpur, kpi_box_kedah, kpi_box_perak, kpi_box_johor
 from scripts.upload_pptx_to_github import upload_pptx_to_github, upload_pdf_to_github
 import time
 
@@ -134,36 +135,20 @@ def yesterday_trends(df):
     johor = df[(df.date == df.date.max()) & (df.state == "Johor")].daily
 
 
-    # malaysia_sum = df[(df.date > '2013-12-31') & (df.state == "Malaysia")].daily.sum()
-    # kedah_sum = df[(df.date > '2013-12-31') & (df.state == "Kedah")].daily.sum()
-    # pulau_pinang_sum = df[(df.date > '2013-12-31') & (df.state == "Pulau Pinang")].daily.sum()
-    # perak_sum = df[(df.date > '2013-12-31') & (df.state == "Perak")].daily.sum()
-    # selangor_sum = df[(df.date > '2013-12-31') & (df.state == "Selangor")].daily.sum()
-    # kuala_lumpur_sum = df[(df.date > '2013-12-31') & (df.state == "W.P. Kuala Lumpur")].daily.sum()
-    # negeri_sembilan_sum = df[(df.date > '2013-12-31') & (df.state == "Negeri Sembilan")].daily.sum()
-    # putrajaya_sum = df[(df.date > '2013-12-31') & (df.state == "W.P. Putrajaya")].daily.sum()
-    # sabah_sum = df[(df.date > '2013-12-31') & (df.state == "Sabah")].daily.sum()
-    # sarawak_sum = df[(df.date > '2013-12-31') & (df.state == "Sarawak")].daily.sum()
-    # kelantan_sum = df[(df.date > '2013-12-31') & (df.state == "Kelantan")].daily.sum()
-    # terengganu_sum= df[(df.date > '2013-12-31') & (df.state == "Terengganu")].daily.sum()
-    # pahang_sum = df[(df.date  > '2013-12-31') & (df.state == "Pahang")].daily.sum()
-    # melaka_sum = df[(df.date  > '2013-12-31') & (df.state == "Melaka")].daily.sum()
-    # johor_sum = df[(df.date > '2013-12-31') & (df.state == "Johor")].daily.sum()
-
-
-    # st.write('Data shown count of blood donors on {}'.format(max(df.date)))
     kpi_box_malaysia(malaysia.iloc[0])
-    kpi_box_1(kuala_lumpur.iloc[0], kedah.iloc[0], perak.iloc[0], johor.iloc[0])
-    kpi_box_2(sarawak.iloc[0], pulau_pinang.iloc[0], sabah.iloc[0], melaka.iloc[0])
-    kpi_box_3(selangor.iloc[0], negeri_sembilan.iloc[0], terengganu.iloc[0], pahang.iloc[0])
-    kpi_box_4(kelantan.iloc[0], 0, 0, 0)
+    column = st.columns([1,1,1,1])
 
-    # st.write('Data as of {}'.format(max(df.date)))
-    # kpi_box_malaysia(malaysia_sum)
-    # kpi_box_1(kedah_sum, pulau_pinang_sum, perak_sum, selangor_sum)
-    # kpi_box_2(kuala_lumpur_sum, negeri_sembilan_sum, sabah_sum, sarawak_sum)
-    # kpi_box_3(kelantan_sum, terengganu_sum, pahang_sum, melaka_sum)
-    # kpi_box_4(johor_sum, 0, 0, 0)
+    column[0].kpi_box_kuala_lumpur(kuala_lumpur.iloc[0])
+    column[1].kpi_box_kedah(kedah.iloc[0])
+    column[2].kpi_box_perak(perak.iloc[0])
+    column[3].kpi_box_johor(johor.iloc[0])
+    # kpi_box_1(kuala_lumpur.iloc[0], kedah.iloc[0], perak.iloc[0], johor.iloc[0])
+    # kpi_box_2(sarawak.iloc[0], pulau_pinang.iloc[0], sabah.iloc[0], melaka.iloc[0])
+    # kpi_box_3(selangor.iloc[0], negeri_sembilan.iloc[0], terengganu.iloc[0], pahang.iloc[0])
+    # kpi_box_4(kelantan.iloc[0], 0, 0, 0)
+
+
+
 
 def retention_trends(df):
     st.write("""### Malaysia's Blood Donors Retention Trends for the past 6 months""")
