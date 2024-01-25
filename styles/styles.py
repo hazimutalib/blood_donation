@@ -116,7 +116,7 @@ def kpi_box_malaysia(malaysia):
     """.format(malaysia), unsafe_allow_html=True)
 
 def kpi_box_kuala_lumpur(kuala_lumpur):
-     st.markdown("""         
+     x = """         
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://c4.wallpaperflare.com/wallpaper/71/359/733/2000px-flag-kuala-lumpur-malaysia-svg-wallpaper-preview.jpg" alt="kuala lumpur" width = "35" height = "20">
@@ -124,7 +124,9 @@ def kpi_box_kuala_lumpur(kuala_lumpur):
             <span class="card-value">{:,}</span>
         </div> 
     </div>
-    """.format(kuala_lumpur), unsafe_allow_html=True)
+    """.format(kuala_lumpur)
+     
+     return x
      
 def kpi_box_kedah(kedah):
      st.markdown("""         
