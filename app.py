@@ -232,8 +232,7 @@ if st.button('Upload'):
     repo_name = 'blood_donation'
     template_path = './blood_donation.pptx'
     file_path = './infographic/output_test.pptx'
-    github_token = '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'
-    upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token)
+    upload_pptx_to_github(repo_owner, repo_name, template_path, file_path)
 
     file_path_pdf = './infographic/output_test.pdf'
     presentation2 = Presentation2()
