@@ -138,10 +138,10 @@ def yesterday_trends(df):
     kpi_box_malaysia(malaysia.iloc[0])
     column = st.columns([1,1,1,1])
 
-    column[0].markdown(kuala_lumpur.iloc[0], unsafe_allow_html=True )
-    column[1].markdown(kuala_lumpur.iloc[0], unsafe_allow_html=True )
-    column[2].markdown(kuala_lumpur.iloc[0], unsafe_allow_html=True )
-    column[3].markdown(kuala_lumpur.iloc[0], unsafe_allow_html=True )
+    column[0].markdown(kpi_box_kuala_lumpur(kuala_lumpur.iloc[0]), unsafe_allow_html=True )
+    column[1].markdown(kpi_box_kuala_lumpur(kuala_lumpur.iloc[0]), unsafe_allow_html=True )
+    column[2].markdown(kpi_box_kuala_lumpur(kuala_lumpur.iloc[0]), unsafe_allow_html=True )
+    column[3].markdown(kpi_box_kuala_lumpur(kuala_lumpur.iloc[0]), unsafe_allow_html=True )
 
 
     # column[0].kpi_box_kuala_lumpur(kuala_lumpur.iloc[0])
