@@ -47,7 +47,7 @@ def historical_trends(df):
     df = df[df.year != '2024']
 
     column = st.columns([3,1])
-    column[0].write("""### Malaysia's Blood Donation Trends from 2012 to 2023""")
+    column[0].write("""### Malaysia's Blood Donation Yearly Trends (2012 - 2023)""")
     column[1].write("""  """)
     column[1].write("""  Data as of {}""".format(max(df.date)))
 
@@ -59,7 +59,7 @@ def historical_trends(df):
 
 
     fig = px.line(df[df.state == 'Malaysia'].groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily',
-                 height = 540, title = 'Count of blood donors by year across Malaysia (2012-2023)')
+                 height = 540, title = 'Time series of blood donors by year across Malaysia (2012 - 2023)')
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
@@ -82,7 +82,7 @@ def historical_trends(df):
 
 
     fig = px.line(df[(df.state != 'Malaysia')].groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily', color = 'state',
-                 height = 540, title = 'Count of blood donors by year across state of Malaysia (2012-2023)')
+                 height = 540, title = 'Time series of blood donors across state of Malaysia (2012 - 2023)')
     # fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
