@@ -61,7 +61,7 @@ def historical_trends(df):
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
-    column[1].write(fig)
+    st.write(fig)
 
     fig = px.bar(df[df.state != 'Malaysia'].groupby('state')['daily'].sum(), orientation='h', text_auto='.2s', width = 540, height = 540, 
                 title = 'Cumulative count of blood donors by state (2012-2023)',)
@@ -71,7 +71,7 @@ def historical_trends(df):
     fig.update_layout(yaxis = {"categoryorder":"total ascending"})
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_xaxes(showticklabels=False)
-    column[3].write(fig)
+    st.write(fig)
 
 
     
@@ -84,7 +84,7 @@ def historical_trends(df):
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor='white', paper_bgcolor = 'white')
-    column[1].write(fig)
+    st.write(fig)
 
 
 
