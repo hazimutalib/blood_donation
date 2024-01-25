@@ -229,6 +229,6 @@ if st.button('Upload'):
     presentation2 = Presentation2()
     presentation2.LoadFromFile(file_path)
     presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
-    # presentation2.Dispose()
+    presentation2.Dispose()
 
     upload_pptx_to_github(repo_owner, repo_name, template_path, file_path_pdf, lol)
