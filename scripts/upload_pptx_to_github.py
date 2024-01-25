@@ -146,7 +146,7 @@ def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, githu
 
 
 
-def upload_pdf_to_github(pdf_file_path, github_token, repo_owner, repo_name):
+def upload_pdf_to_github(pdf_file_path, github_token, repo_owner, repo_name, commit_message="Add PDF file"):
     # Set up the API endpoint
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{pdf_file_path}'
 
@@ -154,9 +154,13 @@ def upload_pdf_to_github(pdf_file_path, github_token, repo_owner, repo_name):
     with open(pdf_file_path, 'rb') as pdf_file:
         pdf_content = pdf_file.read()
 
+    # Encode the content in base64
+    encoded_content = base64.b64encode(pdf_content).decode('utf-8')
+
     # Create the API payload
     payload = {
-        'content': pdf_content,
+        'message': commit_message,
+        'content': encoded_content,
     }
 
     # Set the Authorization header with the GitHub token
