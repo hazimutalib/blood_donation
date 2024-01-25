@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px 
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
+import scripts.test
 from io import BytesIO
 import requests
 from styles.styles import kpi_box_malaysia, kpi_box_1, kpi_box_2, kpi_box_3, kpi_box_4, kpi_box_css, body_css, kpi_box_granular
@@ -240,4 +241,4 @@ if st.button('Upload'):
     presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
     # presentation2.Dispose()
 
-    upload_pptx_to_github(repo_owner, repo_name, template_path, file_path_pdf, github_token)
+    upload_pptx_to_github(repo_owner, repo_name, template_path, file_path_pdf, lol)

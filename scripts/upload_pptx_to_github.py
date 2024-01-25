@@ -108,7 +108,7 @@ def edit_powerpoint_template(template_path, output_path):
 
 
 
-def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path):
+def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token):
     
 
     edit_powerpoint_template(template_path, file_path)
@@ -121,7 +121,7 @@ def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path):
     api_url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}'
 
     # Check if the file exists
-    response = requests.get(api_url, headers={'Authorization': f'Token {'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'}'})
+    response = requests.get(api_url, headers={'Authorization': f'Token {github_token}'})
     if response.status_code == 200:
         # File exists, update it
         sha = response.json()['sha']
@@ -137,7 +137,7 @@ def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path):
         'sha': sha  # Include the SHA here
     }
 
-    response = requests.put(api_url, headers={'Authorization': f'Token {'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'}'}, json=commit_data)
+    response = requests.put(api_url, headers={'Authorization': f'Token {github_token}'}, json=commit_data)
 
     if response.status_code == 200:
         print('Presentation file successfully saved to GitHub.')
