@@ -163,7 +163,7 @@ def yesterday_trends(df):
     column = st.columns([1,4,1,4,1])
 
     fig = px.line(df[(df.state == 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', 
-                  width = 540 , title = 'Time series of blood donors of Malaysia (YTD)')
+                  width = 520 , title = 'Time series of blood donors of Malaysia (YTD)')
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
@@ -172,7 +172,7 @@ def yesterday_trends(df):
 
 
     fig = px.line(df[(df.state != 'Malaysia')].groupby(['date','state'])['daily'].sum().reset_index(), x = 'date', y = 'daily', color = 'state',
-                 width = 540, title = 'Time series of blood donors across state (YTD)')
+                 width = 520, title = 'Time series of blood donors across state (YTD)')
     # fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
