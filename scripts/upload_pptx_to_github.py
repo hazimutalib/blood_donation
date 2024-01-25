@@ -42,7 +42,7 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                 
                 if "malaysia" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("malaysia", "{:,}".format(malaysia))
-                    set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
+                    set_font_properties(shape.text_frame, content_font_name, content_font_size, (255, 255, 255), content_is_bold, content_alignment)
 
                 if "perlis" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("perlis", "0")
@@ -109,7 +109,7 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, content_font_color, content_is_bold, content_alignment)
 
                 if "date" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("johor", "{:,}".format(johor))
+                    shape.text_frame.text = shape.text_frame.text.replace("date", "{:,}".format(johor))
                     set_font_properties(shape.text_frame, 'Verdana', 11, content_font_color, content_is_bold, content_alignment)
 
 
