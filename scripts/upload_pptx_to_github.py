@@ -110,11 +110,11 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
 
                 if "date" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("date", "{}".format(max_date))
-                    set_font_properties(shape.text_frame, 'Verdana', 16, content_font_color, content_is_bold, content_alignment)
+                    set_font_properties(shape.text_frame, 'Verdana', 18, content_font_color, content_is_bold, content_alignment)
 
                 if "count" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("count", "{}".format(max_date))
-                    set_font_properties(shape.text_frame, 'Verdana', 46, content_font_color, content_is_bold, content_alignment)
+                    set_font_properties(shape.text_frame, 'Verdana', 48, content_font_color, content_is_bold, content_alignment)
 
 
     # Save the modified presentation
