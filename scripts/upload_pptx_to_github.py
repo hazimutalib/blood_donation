@@ -131,64 +131,39 @@ def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, githu
     edit_powerpoint_template(template_path, file_path, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
                              negeri_sembilan, terengganu, pahang, kelantan, max_date)
 
-     # Set up the API endpoint
-    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}'
 
-    # Read the PDF file content
-    with open(file_path, 'rb') as pptx_file:
-        pdf_content = pptx_file.read()
+    with open(file_path, 'rb') as file:
+        # file_content = base64.b64encode(file.read()).decode('utf-8')
+        file_content = file.read()
 
-    # Encode the content in base64
-    encoded_content = pdf_content
-
-    # Create the API payload
-    payload = {
-        'message': commit_message,
-        'content': encoded_content,
-    }
-
-    # Set the Authorization header with the GitHub token
-    headers = {
-        'Authorization': f'token {github_token}',
-    }
-
-    # Make the API request to create or update the file
-    response = requests.put(url, json=payload, headers=headers)
-
-    if response.status_code == 201:
-        print(f'PPTX file {file_path} successfully uploaded to GitHub.')
-    else:
-        print(f'Failed to upload PPTX file. Status code: {response.status_code}\nResponse content: {response.text}')
-
-    # with open(file_path, 'rb') as file:
-    #     file_content = base64.b64encode(file.read()).decode('utf-8')
-    #     # file_content = file.read()
+    with open("new_presentation.pptx", "wb") as file:
+        file.write(file_content)
     
-    # api_url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}'
+    api_url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}'
 
-    # # Check if the file exists
-    # response = requests.get(api_url, headers={'Authorization': f'Token {github_token}'})
-    # if response.status_code == 200:
-    #     # File exists, update it
-    #     sha = response.json()['sha']
-    # else:
-    #     # File doesn't exist, create it
-    #     sha = None
 
-    # # Create a commit with the updated presentation file
-    # commit_message = 'Automated commit: Add/update PowerPoint presentation'
-    # commit_data = {
-    #     'message': commit_message,
-    #     'content': file_content,
-    #     'sha': sha  # Include the SHA here
-    # }
+    response = requests.get(api_url, headers={'Authorization': f'Token {github_token}'})
+    if response.status_code == 200:
 
-    # response = requests.put(api_url, headers={'Authorization': f'Token {github_token}'}, json=commit_data)
+        sha = response.json()['sha']
+    else:
 
-    # if response.status_code == 200:
-    #     print('Presentation file successfully saved to GitHub.')
-    # else:
-    #     print(f'Failed to save presentation file. Status code: {response.status_code}, Message: {response.text}')
+        sha = None
+
+    # Create a commit with the updated presentation file
+    commit_message = 'Automated commit: Add/update PowerPoint presentation'
+    commit_data = {
+        'message': commit_message,
+        'content': file_content,
+        'sha': sha  # Include the SHA here
+    }
+
+    response = requests.put(api_url, headers={'Authorization': f'Token {github_token}'}, json=commit_data)
+
+    if response.status_code == 200:
+        print('Presentation file successfully saved to GitHub.')
+    else:
+        print(f'Failed to save presentation file. Status code: {response.status_code}, Message: {response.text}')
 
 
 
