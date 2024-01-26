@@ -133,8 +133,8 @@ def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, githu
 
 
     with open(file_path, 'rb') as file:
-        # file_content = base64.b64encode(file.read()).decode('utf-8')
-        file_content = file.read()
+        file_content = base64.b64encode(file.read()).decode('utf-8')
+        # file_content = file.read()
 
 
     api_url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}'
