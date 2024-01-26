@@ -125,7 +125,7 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
 
 
 def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
-                             negeri_sembilan, terengganu, pahang, kelantan, max_date, commit_message = "Add PPTX file"):
+                             negeri_sembilan, terengganu, pahang, kelantan, max_date):
     
 
     edit_powerpoint_template(template_path, file_path, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
@@ -133,8 +133,8 @@ def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, githu
 
 
     with open(file_path, 'rb') as file:
-        # file_content = base64.b64encode(file.read()).decode('utf-8')
-        file_content = file.read()
+        file_content = base64.b64encode(file.read()).decode('utf-8')
+        # file_content = file.read()
 
     with open("new_presentation.pptx", "wb") as file:
         file.write(file_content)
