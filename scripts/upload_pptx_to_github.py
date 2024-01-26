@@ -27,7 +27,7 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
     presentation = Presentation(template_path)
 
     # Font properties for the title and content
-    content_font_name = "Verdana"
+    content_font_name = "Aharoni"
     content_font_size = 56
     content_font_color = (0, 0, 0)  # RGB color tuple, e.g., black
     content_is_bold = True
