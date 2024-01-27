@@ -120,7 +120,7 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
 
                 if "daily_mly" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("daily_mly", "{:,}".format(daily_malaysia))
-                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+                    set_font_properties(shape.text_frame, content_font_name, 24, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_pls" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("daily_pls", "0")
@@ -140,7 +140,7 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
 
                 if "daily_slgr" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("daily_slgr", "{:,}".format(daily_selangor))
-                    set_font_properties(shape.text_frame, content_font_name, content_font_size, (28, 182, 54), content_is_bold, content_alignment)
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_kl" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("daily_kl", "{:,}".format(daily_kuala_lumpur))
@@ -156,7 +156,7 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                 
                 if "daily_sbh" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("daily_sbh", "{:,}".format(daily_sabah))
-                    set_font_properties(shape.text_frame, content_font_name, content_font_size, (28, 182, 54), content_is_bold, content_alignment)
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_lbn" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("daily_lbn", "0")
