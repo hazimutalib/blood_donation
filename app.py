@@ -215,9 +215,9 @@ def yesterday_trends(df):
 
         upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol, malaysia_total, kuala_lumpur_total, kedah_total, 
                               perak_total, johor_total, sarawak_total, pulau_pinang_total, sabah_total, melaka_total, selangor_total, 
-                             negeri_sembilan_total, terengganu_total, pahang_total, kelantan_total, max(df.date), malaysia, kuala_lumpur, kedah, 
-                              perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
-                             negeri_sembilan, terengganu, pahang, kelantan)
+                             negeri_sembilan_total, terengganu_total, pahang_total, kelantan_total, max(df.date), malaysia.iloc[0], kuala_lumpur.iloc[0], kedah.iloc[0], 
+                              perak.iloc[0], johor.iloc[0], sarawak.iloc[0], pulau_pinang.iloc[0], sabah.iloc[0], melaka.iloc[0], selangor.iloc[0], 
+                             negeri_sembilan.iloc[0], terengganu.iloc[0], pahang.iloc[0], kelantan.iloc[0])
         
 
         file_path_pdf = './infographic/blood_donation_{}.pdf'.format(max(df.date))
