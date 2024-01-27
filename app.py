@@ -244,7 +244,7 @@ def yesterday_trends(df):
    
                         """.format(max(df.date))
         try:
-            bot.send_message(channel_id, message)
+            bot.send_message(channel_id, message, parse_mode='Markdown')
             with open(file_path_pdf, 'rb') as file:
                 bot.send_document(channel_id, file)
         except:
