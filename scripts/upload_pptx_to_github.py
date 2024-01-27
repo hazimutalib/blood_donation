@@ -166,8 +166,8 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                     shape.text_frame.text = shape.text_frame.text.replace("daily_srwk", "{:,}".format(daily_sarawak))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
-                if "daily_kltn" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_kltn", "{:,}".format(daily_kelantan))
+                if "daily_ktn" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_ktn", "{:,}".format(daily_kelantan))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_trgn" in shape.text_frame.text:
