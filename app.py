@@ -12,6 +12,7 @@ from styles.styles import kpi_box_kuala_lumpur, kpi_box_kedah, kpi_box_perak, kp
 from styles.styles import kpi_box_selangor, kpi_box_negeri_sembilan, kpi_box_terengganu, kpi_box_pahang, kpi_box_kelantan, kpi_box_perlis, kpi_box_putrajaya, kpi_box_labuan
 from scripts.upload_pptx_to_github import upload_pptx_to_github, upload_pdf_to_github
 import time
+import telebot
 from spire.presentation import Presentation as Presentation2, FileFormat
 
 
@@ -37,7 +38,6 @@ st.markdown(
 donations_state_url = "https://raw.githubusercontent.com/MoH-Malaysia/data-darah-public/main/donations_state.csv"
 kpi_box_css()
 df = pd.read_csv(donations_state_url)
-df = df[df.date > '2011-12-31']
 df.date = pd.to_datetime(df.date).dt.date
 df['year'] = df['date'].astype('str').apply(lambda x: x[:4])
 
@@ -46,8 +46,8 @@ df['year'] = df['date'].astype('str').apply(lambda x: x[:4])
 def historical_trends(df):
     df = df[df.year != '2024']
 
-    column = st.columns([3,1])
-    column[0].write("""### Malaysia's Blood Donation Yearly Trends (2012 - 2023)""")
+    column = st.columns([7,2])
+    column[0].write("""### Malaysia's Blood Donation Yearly Trends (2006 - 2023)""")
     column[1].write("""  """)
     column[1].write("""  Data as of {}""".format(max(df.date)))
 
@@ -59,7 +59,7 @@ def historical_trends(df):
 
 
     fig = px.line(df[df.state == 'Malaysia'].groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily',
-                 height = 540, title = 'Time series of blood donors by year across Malaysia (2012 - 2023)')
+                 height = 540, title = 'Time series of blood donors by year across Malaysia (2006 - 2023)')
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
@@ -69,7 +69,7 @@ def historical_trends(df):
     st.write("""# """)
 
     fig = px.bar(df[df.state != 'Malaysia'].groupby('state')['daily'].sum(), orientation='h', text_auto='.2s',  height = 540, 
-                title = 'Cumulative count of blood donors by state (2012-2023)',)
+                title = 'Cumulative count of blood donors by state (2006 - 2023)',)
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
@@ -82,7 +82,7 @@ def historical_trends(df):
 
 
     fig = px.line(df[(df.state != 'Malaysia')].groupby(['year','state'])['daily'].sum().reset_index(), x = 'year', y = 'daily', color = 'state',
-                 height = 540, title = 'Time series of blood donors across state of Malaysia (2012 - 2023)')
+                 height = 540, title = 'Time series of blood donors across state of Malaysia (2006 - 2023)')
     # fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
@@ -92,7 +92,7 @@ def historical_trends(df):
 
 
 def yesterday_trends(df):
-    column = st.columns([3,1])
+    column = st.columns([7,2])
     column[0].write("""### Malaysia's Blood Donation Daily Updates (2024)""")
     column[1].write(""" """)
     column[1].write(""" Data as of {}""".format(max(df.date)))
@@ -226,50 +226,116 @@ def yesterday_trends(df):
         presentation2.Dispose()
         upload_pdf_to_github(file_path_pdf, lol, repo_owner, repo_name)
 
+        API_TOKEN = '6430193325:AAFkiOTYhb574_owPQVunkNHslzIxRAtNX8'
+        bot = telebot.TeleBot(API_TOKEN)
+
+        channel_id = '@blood_donatio'
+
+
+        try:
+
+            with open(file_path_pdf, 'rb') as file:
+                bot.send_document(channel_id, file)
+
+        except:
+            print('Message failed to send')
 
 
 
 
 
-def retention_trends(df):
-    st.write("""### Malaysia's Blood Donors Retention Trends for the past 6 months""")
-    st.write("""##### Regular donors are individuals who have made more than one blood donation within the last 6 months as of the latest date in the dataset""")
-    
+
+def retention_trends():
+    st.write("""### Malaysia's Blood Donors Retention Trends (2012 - 2024)""")
     parquet_file_url = 'https://dub.sh/ds-data-granular'
     response = requests.get(parquet_file_url)
     parquet_data = BytesIO(response.content)
     df_granular = pq.read_pandas(parquet_data).to_pandas()
     df_granular.visit_date = pd.to_datetime(df_granular.visit_date).dt.date
-    df_granular = df_granular[df_granular.visit_date >= max(df_granular.visit_date) - relativedelta(months=6)]
-    st.write('The 6 months period are from {} to {}'.format(min(df_granular.visit_date), max(df_granular.visit_date)))
-
-    donors_aggregated = df[(df.state == 'Malaysia')].daily.sum()
     donors = len(df_granular.donor_id)
     unique_donors = len(df_granular.donor_id.unique())
-    pre_regular_donors = df_granular.groupby('donor_id')['visit_date'].count().sort_values(ascending=False).reset_index()
-    pre_regular_donors1 = pre_regular_donors.groupby('visit_date')['donor_id'].count().reset_index()
-    regular_donors = pre_regular_donors1[pre_regular_donors1.visit_date >= 2].donor_id.sum()
 
-  
+    kpi_box_granular(donors, unique_donors)
+
+    df_granular['visit_year'] = pd.to_datetime(df_granular.visit_date).dt.year
+    df_granular['visit_age'] = df_granular.visit_year - df_granular.birth_date
+
+
+
+    df_new = df_granular.groupby(['donor_id'])['birth_date'].mean().sort_values(ascending=False).reset_index()
+    df_new['age'] = 2024 - df_new['birth_date']
+    df_new['age_band'] = ''
+    df_new.age_band[df_new.age < 18] = '0 - 17'
+    df_new.age_band[(df_new.age >= 18) & (df_new.age < 30)] = '18-29'
+    df_new.age_band[(df_new.age >= 30) & (df_new.age < 40)] = '30-39'
+    df_new.age_band[(df_new.age >= 40) & (df_new.age < 50)] = '40-49'
+    df_new.age_band[(df_new.age >= 50) & (df_new.age < 60)] = '50-59'
+    df_new.age_band[(df_new.age >= 60)] = '60>='
+    df_new1  = df_new.groupby(['age_band'])['age_band'].count()
+
+
+    df_new2 = df_granular
+    df_new2['visit_age_band'] = ''
+    df_new2.visit_age_band[df_new2.visit_age < 18] = '0 - 17'
+    df_new2.visit_age_band[(df_new2.visit_age >= 18) & (df_new2.visit_age < 30)] = '18-29'
+    df_new2.visit_age_band[(df_new2.visit_age >= 30) & (df_new2.visit_age < 40)] = '30-39'
+    df_new2.visit_age_band[(df_new2.visit_age >= 40) & (df_new2.visit_age < 50)] = '40-49'
+    df_new2.visit_age_band[(df_new2.visit_age >= 50) & (df_new2.visit_age < 60)] = '50-59'
+    df_new2.visit_age_band[(df_new2.visit_age >= 60)] = '60>='
+    df_new3  = df_new2.groupby(['visit_age_band'])['visit_age_band'].count()
     
 
-    # fig = px.bar(lol1, orientation='h', text_auto='.2s', width = 440, height = 500, 
-    #             title = 'Blood donors by state (2012 - 2024)')
-    # fig.update_traces(showlegend = False)
-    # fig.update_layout(yaxis_title=None)
-    # fig.update_layout(xaxis_title=None)
-    # # fig.update_layout(yaxis = {"categoryorder":"total ascending"})
-    # fig.update_layout(plot_bgcolor='white', paper_bgcolor = 'white')
-    # fig.update_xaxes(showticklabels=False)
-    # column[0].write(fig)
-    kpi_box_granular(donors, unique_donors, regular_donors, regular_donors/unique_donors)
+    df_new4 = df_granular.groupby('donor_id')['visit_date'].count().reset_index()
+    df_new5 = df_new4.groupby('visit_date')['donor_id'].count().reset_index()
+    df_new5['frequency'] = df_new5.visit_date.astype('str')
+    df_new5.frequency[(df_new5.visit_date == 1)] = '1'
+    df_new5.frequency[(df_new5.visit_date == 2)] = '2'
+    df_new5.frequency[(df_new5.visit_date >= 3) & (df_new5.visit_date < 10)] = '3 - 9'
+    df_new5.frequency[(df_new5.visit_date >= 10) & (df_new5.visit_date < 20)] = '10 - 19'
+    df_new5.frequency[(df_new5.visit_date >= 20) & (df_new5.visit_date < 30)] = '20 - 29'
+    df_new5.frequency[(df_new5.visit_date >= 30) & (df_new5.visit_date < 40)] = '30 - 39'
+    df_new5.frequency[(df_new5.visit_date >= 40) & (df_new5.visit_date < 50)] = '40 - 49'
+    df_new5.frequency[(df_new5.visit_date >= 50)] = '50>='
 
-    # st.write(df_granular)
-    # st.write(donors_aggregated)
-    # st.write(donors)
-    # st.write(unique_donors)
 
-tab1, tab2, tab3 = st.tabs(["Latest daily update", "Historical trends", "Blood retention trends"])
+    fig = px.bar(df_new3, orientation='v', text_auto='.2s',  height = 540, 
+                title = 'Age demographic (during blood donation) of blood donors <br><sup>Total size = {:,}</sup>'.format(donors))
+    fig.update_traces(showlegend = False)
+    fig.update_layout(yaxis_title=None)
+    fig.update_layout(xaxis_title=None)
+    # fig.update_layout(yaxis = {"categoryorder":"total ascending"})
+    fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
+    fig.update_yaxes(showticklabels=False)
+    fig.update_yaxes(showgrid=False)
+    st.write(fig)
+
+    st.write("""# """)
+
+    fig = px.bar(df_new1, orientation='v', text_auto='.2s',  height = 540, 
+                title = 'Age demographic (as of 2024) of unique blood donors <br><sup>Total size = {:,}</sup>'.format(unique_donors))
+    fig.update_traces(showlegend = False)
+    fig.update_layout(yaxis_title=None)
+    fig.update_layout(xaxis_title=None)
+    # fig.update_layout(yaxis = {"categoryorder":"total ascending"})
+    fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
+    fig.update_yaxes(showticklabels=False)
+    fig.update_yaxes(showgrid=False)
+    st.write(fig)
+    
+    st.write("""# """)
+    
+    fig = px.bar(df_new5.groupby('frequency')['donor_id'].sum(), orientation='v', text_auto='.2s',  height = 540, 
+                title = 'Donation Frequency Among Blood Donors <br><sup>Total size = {:,}</sup>'.format(unique_donors))
+    fig.update_traces(showlegend = False)
+    fig.update_layout(yaxis_title=None)
+    fig.update_layout(xaxis_title=None)
+    fig.update_layout(xaxis = {'categoryorder':'array', 'categoryarray':['1', '2', '3 - 9','10 - 19', '20 - 29', '30 - 39', '40 - 49', '50>=']})
+    fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
+    fig.update_yaxes(showticklabels=False)
+    fig.update_yaxes(showgrid=False)
+    st.write(fig)
+
+tab1, tab2, tab3 = st.tabs(["Latest daily trends", "Historical trends", "Blood retention trends"])
 
 with tab1:
    yesterday_trends(df)
@@ -278,7 +344,7 @@ with tab2:
    historical_trends(df)
 
 with tab3:
-   retention_trends(df)
+   retention_trends()
 
 
 

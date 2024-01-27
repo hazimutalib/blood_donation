@@ -73,12 +73,12 @@ def kpi_box_css():
     """, unsafe_allow_html=True)
 
 
-def kpi_box_granular(donors, unique_donors, regular_donors, percentage):
+def kpi_box_granular(donors, unique_donors):
     st.markdown("""
     <div id="container"  class = "lol" >
         <div class="kpi-card blue-gradient ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Flag_of_Malaysia.svg/383px-Flag_of_Malaysia.svg.png" alt="kedah" width = "35" height = "20">
-            <span class="card-text">TOTAL DONORS</span>
+            <span class="card-text">TOTAL BLOOD DONATIONS</span>
             <span class="card-value">{:,}</span>    
         </div>
         <div class="kpi-card blue-gradient ">
@@ -86,20 +86,9 @@ def kpi_box_granular(donors, unique_donors, regular_donors, percentage):
             <span class="card-text">UNIQUE DONORS</span>
             <span class="card-value">{:,}</span>    
         </div>
-        <div class="kpi-card blue-gradient ">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Flag_of_Malaysia.svg/383px-Flag_of_Malaysia.svg.png" alt="kedah" width = "35" height = "20">
-            <span class="card-text">REGULAR DONORS</span>
-            <span class="card-value">{:,}</span>    
-        </div>
-        <div class="kpi-card blue-gradient ">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Flag_of_Malaysia.svg/383px-Flag_of_Malaysia.svg.png" alt="kedah" width = "35" height = "20">
-            <span class="card-text">REGULAR DONORS (%)</span>
-            <span class="card-value">{:.1%}</span>    
-        </div>
                 
-                
-    </div>
-    """.format(donors, unique_donors, regular_donors, percentage), unsafe_allow_html=True)
+      </div>
+    """.format(donors, unique_donors), unsafe_allow_html=True)
 
 
 def kpi_box_malaysia(malaysia):
