@@ -1,6 +1,4 @@
 import telebot
-import requests
-from io import BytesIO
 
 API_TOKEN = '6430193325:AAFkiOTYhb574_owPQVunkNHslzIxRAtNX8'
 bot = telebot.TeleBot(API_TOKEN)
