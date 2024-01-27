@@ -92,7 +92,6 @@ def historical_trends(df):
 
 
 def yesterday_trends(df):
-    df.to_csv('./lol.csv')
     column = st.columns([7,2])
     column[0].write("""### Malaysia's Blood Donation Daily Updates (2024)""")
     column[1].write(""" """)
