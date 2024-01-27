@@ -92,6 +92,7 @@ def historical_trends(df):
 
 
 def yesterday_trends(df):
+    df.to_csv('lol.csv')
     column = st.columns([7,2])
     column[0].write("""### Malaysia's Blood Donation Daily Updates (2024)""")
     column[1].write(""" """)
@@ -226,8 +227,9 @@ def yesterday_trends(df):
         presentation2.Dispose()
         upload_pdf_to_github(file_path_pdf, lol, repo_owner, repo_name)
 
-        API_TOKEN = '6430193325:AAFkiOTYhb574_owPQVunkNHslzIxRAtNX8'
-        bot = telebot.TeleBot(API_TOKEN)
+        tkn = '6430193325:AAFkiOTYhb574_owPQVunkNHslzIxRAtNX8'
+
+        bot = telebot.TeleBot(tkn)
 
         channel_id = '@blood_donatio'
 
