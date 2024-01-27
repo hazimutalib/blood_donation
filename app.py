@@ -231,13 +231,22 @@ def yesterday_trends(df):
         bot = telebot.TeleBot(tkn)
 
         channel_id = '@blood_donatio'
+        message = """
+                        🩸 **Blood Donation Update - {}** 🩸
 
+                        📈 Today's Blood Donation Count:
+                        - Total Donations: [Total Count]
+                        - New Donations: [New Count]
 
+                        Thank you to all donors for making a difference! 💖
+
+                        #BloodDonation #DonateLife #SaveLives
+   
+                        """.format(max(df.date))
         try:
-
+            bot.send_message(channel_id, message)
             with open(file_path_pdf, 'rb') as file:
                 bot.send_document(channel_id, file)
-
         except:
             print('Message failed to send')
 
