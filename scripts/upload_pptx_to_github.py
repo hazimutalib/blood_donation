@@ -22,7 +22,9 @@ def set_font_properties(text_frame, font_name, font_size, font_color, is_bold, a
 
 
 def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
-                             negeri_sembilan, terengganu, pahang, kelantan, max_date):
+                             negeri_sembilan, terengganu, pahang, kelantan, max_date, daily_malaysia, daily_kuala_lumpur, daily_kedah, daily_perak, daily_johor,
+                             daily_sarawak, daily_pulau_pinang, daily_sabah, daily_melaka, daily_selangor, 
+                             daily_negeri_sembilan, daily_terengganu, daily_pahang, daily_kelantan):
     # Load the template presentation
     presentation = Presentation(template_path)
 
@@ -117,7 +119,7 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                     set_font_properties(shape.text_frame, 'Verdana', 48, content_font_color, content_is_bold, content_alignment)
 
                 if "daily_mly" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_mly", "{:,}".format(malaysia))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_mly", "{:,}".format(daily_malaysia))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_pls" in shape.text_frame.text:
@@ -125,23 +127,23 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_kdh" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_kdh", "{:,}".format(kedah))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_kdh", "{:,}".format(daily_kedah))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
                 
                 if "daily_png" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_png", "{:,}".format(pulau_pinang))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_png", "{:,}".format(daily_pulau_pinang))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_prk" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_prk", "{:,}".format(perak))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_prk", "{:,}".format(daily_perak))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_slgr" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_slgr", "{:,}".format(selangor))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_slgr", "{:,}".format(daily_selangor))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_kl" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_kl", "{:,}".format(kuala_lumpur))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_kl", "{:,}".format(daily_kuala_lumpur))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_pjy" in shape.text_frame.text:
@@ -149,11 +151,11 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_ns" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_ns", "{:,}".format(negeri_sembilan))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_ns", "{:,}".format(daily_negeri_sembilan))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
                 
                 if "daily_sbh" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_sbh", "{:,}".format(sabah))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_sbh", "{:,}".format(daily_sabah))
                     set_font_properties(shape.text_frame, content_font_name, content_font_size, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_lbn" in shape.text_frame.text:
@@ -161,27 +163,27 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
                 
                 if "daily_srwk" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_srwk", "{:,}".format(sarawak))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_srwk", "{:,}".format(daily_sarawak))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_kltn" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_kltn", "{:,}".format(kelantan))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_kltn", "{:,}".format(daily_kelantan))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_trgn" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_trgn", "{:,}".format(terengganu))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_trgn", "{:,}".format(daily_terengganu))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_phg" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_phg", "{:,}".format(pahang))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_phg", "{:,}".format(daily_pahang))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_mlk" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_mlk", "{:,}".format(melaka))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_mlk", "{:,}".format(daily_melaka))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
                 if "daily_jhr" in shape.text_frame.text:
-                    shape.text_frame.text = shape.text_frame.text.replace("daily_jhr", "{:,}".format(johor))
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_jhr", "{:,}".format(daily_johor))
                     set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
 
@@ -193,11 +195,15 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
 
 
 def upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, github_token, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
-                             negeri_sembilan, terengganu, pahang, kelantan, max_date):
+                             negeri_sembilan, terengganu, pahang, kelantan, max_date, daily_malaysia, daily_kuala_lumpur, daily_kedah, daily_perak, daily_johor,
+                             daily_sarawak, daily_pulau_pinang, daily_sabah, daily_melaka, daily_selangor, 
+                             daily_negeri_sembilan, daily_terengganu, daily_pahang, daily_kelantan):
     
 
     edit_powerpoint_template(template_path, file_path, malaysia, kuala_lumpur, kedah, perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
-                             negeri_sembilan, terengganu, pahang, kelantan, max_date)
+                             negeri_sembilan, terengganu, pahang, kelantan, max_date, daily_malaysia, daily_kuala_lumpur, daily_kedah, daily_perak, daily_johor,
+                             daily_sarawak, daily_pulau_pinang, daily_sabah, daily_melaka, daily_selangor, 
+                             daily_negeri_sembilan, daily_terengganu, daily_pahang, daily_kelantan)
 
 
     with open(file_path, 'rb') as file:
