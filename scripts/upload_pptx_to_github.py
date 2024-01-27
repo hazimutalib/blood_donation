@@ -110,11 +110,79 @@ def edit_powerpoint_template(template_path, output_path, malaysia, kuala_lumpur,
 
                 if "max_date" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("max_date", "{}".format(max_date))
-                    set_font_properties(shape.text_frame, 'Verdana', 18, content_font_color, content_is_bold, content_alignment)
+                    set_font_properties(shape.text_frame, 'Ahoroni', 18, content_font_color, content_is_bold, content_alignment)
 
                 if "last_date" in shape.text_frame.text:
                     shape.text_frame.text = shape.text_frame.text.replace("last_date", "{}".format(max_date))
                     set_font_properties(shape.text_frame, 'Verdana', 48, content_font_color, content_is_bold, content_alignment)
+
+                if "daily_mly" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_mly", "{:,}".format(malaysia))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_pls" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_pls", "0")
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_kdh" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_kdh", "{:,}".format(kedah))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+                
+                if "daily_png" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_png", "{:,}".format(pulau_pinang))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_prk" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_prk", "{:,}".format(perak))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_slgr" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_slgr", "{:,}".format(selangor))
+                    set_font_properties(shape.text_frame, content_font_name, content_font_size, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_kl" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_kl", "{:,}".format(kuala_lumpur))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_pjy" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_pjy", "0")
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_ns" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_ns", "{:,}".format(negeri_sembilan))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+                
+                if "daily_sbh" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_sbh", "{:,}".format(sabah))
+                    set_font_properties(shape.text_frame, content_font_name, content_font_size, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_lbn" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_lbn", "0")
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+                
+                if "daily_srwk" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_srwk", "{:,}".format(sarawak))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_kltn" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_kltn", "{:,}".format(kelantan))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_trgn" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_trgn", "{:,}".format(terengganu))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_phg" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_phg", "{:,}".format(pahang))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_mlk" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_mlk", "{:,}".format(melaka))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
+
+                if "daily_jhr" in shape.text_frame.text:
+                    shape.text_frame.text = shape.text_frame.text.replace("daily_jhr", "{:,}".format(johor))
+                    set_font_properties(shape.text_frame, content_font_name, 20, (28, 182, 54), content_is_bold, content_alignment)
 
 
     # Save the modified presentation

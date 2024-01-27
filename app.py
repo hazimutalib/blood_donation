@@ -232,15 +232,15 @@ def yesterday_trends(df):
 
         channel_id = '@blood_donatio'
         message = """
-                        🩸 **Blood Donation Update - {}** 🩸
+        🩸 **Blood Donation Update - {}** 🩸
 
-                        📈 Today's Blood Donation Count:
-                        - Total Donations: [Total Count]
-                        - New Donations: [New Count]
+        📈 Today's Blood Donation Count:
+        - Total Donations: [Total Count]
+        - New Donations: [New Count]
 
-                        Thank you to all donors for making a difference! 💖
+        Thank you to all donors for making a difference! 💖
 
-                        #BloodDonation #DonateLife #SaveLives
+        #BloodDonation #DonateLife #SaveLives
    
                         """.format(max(df.date))
         try:
