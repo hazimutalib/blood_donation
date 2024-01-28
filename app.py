@@ -46,21 +46,21 @@ bot = telebot.TeleBot(API_TOKEN)
 channel_id = '@blood_donatio'
 
 
-def job():
-    print("Job is running...")
-    try:
-        bot.send_message(channel_id, 'Hello, World!')
-        file_path = '.infographics/blood_donation.pdf'
+# def job():
+#     print("Job is running...")
+#     try:
+#         bot.send_message(channel_id, 'Hello, World!')
+#         file_path = '.infographics/blood_donation.pdf'
 
-    except:
-        print('Message failed to send')
-
-
-schedule.every(3).minutes.do(job)
+#     except:
+#         print('Message failed to send')
 
 
-while True:
-    schedule.run_pending()
-    time.sleep(60)
+# schedule.every(3).minutes.do(job)
+
+
+# while True:
+#     schedule.run_pending()
+#     time.sleep(60)
 
 
