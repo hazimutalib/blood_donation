@@ -44,7 +44,6 @@ url_to_check = 'https://github.com/hazimutalib/blood_donation/blob/main/infograp
 response = requests.get(url_to_check)
 
 def job():
-    st.write(datetime.now())
     today_date = datetime.now().date()
     difference = today_date - max_date
     if (difference.days == 1) & (response.status_code // 100 != 2):
@@ -95,7 +94,7 @@ def job():
         x = 0
 
     else:
-        st. write('###### Data has not been updated')
+        st.write(datetime.now())
 
 
 schedule.every(60).minutes.do(job)
