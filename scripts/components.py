@@ -144,15 +144,15 @@ def latest_trends(df, max_date):
 
         channel_id = '@blood_donatio'
         message = """
-        🩸 **Blood Donation Update - {}** 🩸
+        🩸 **Blood Donation Update of 2024 - Data as of {}** 🩸
         📈 Today's Blood Donation Count:
-        - Total Donations: [Total Count]
-        - New Donations: [New Count]
+        - Total Donations: {:,}
+        - Latest Daily Donations: {:,}
 
         Thank you to all donors for making a difference! 💖
         #BloodDonation #DonateLife #SaveLives
 
-                        """.format(max(df.date))
+                        """.format(max_date, malaysia_total, malaysia)
         try:
             bot.send_message(channel_id, message, parse_mode='Markdown')
             with open(file_path_pdf, 'rb') as file:
