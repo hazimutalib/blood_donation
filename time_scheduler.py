@@ -93,8 +93,7 @@ def job():
             print('Message failed to send')
 
         x = 0
-    else:
-        st.write(datetime.now() + timedelta(hours = 8))
+
 
 
 
