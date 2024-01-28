@@ -46,9 +46,8 @@ url_to_check = 'https://github.com/hazimutalib/blood_donation/blob/main/infograp
 response = requests.get(url_to_check)
 difference = today_date - max_date
 
-x = 1
 
-while x == 1:
+def job():
     if (difference.days == 1) & (response.status_code // 100 != 2):
         repo_owner = 'hazimutalib'
         repo_name = 'blood_donation'
@@ -95,6 +94,12 @@ while x == 1:
             print('Message failed to send')
 
         x = 0
-    
+
     else:
-        time.sleep(60)
+        st. write('###### Data has not been updated')
+
+
+schedule.every(1).minutes.do(job)
+
+while True:
+    schedule.run_pending()
