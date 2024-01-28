@@ -26,12 +26,13 @@ donations_state_url = "https://raw.githubusercontent.com/MoH-Malaysia/data-darah
 df = pd.read_csv(donations_state_url)
 df.date = pd.to_datetime(df.date).dt.date
 df['year'] = df['date'].astype('str').apply(lambda x: x[:4])
+max_date = max(df.date)
 
 
 #web app tabs
 tab1, tab2, tab3 = st.tabs(["Latest daily trends", "Historical trends", "Blood retention trends"])
 with tab1:
-   yesterday_trends(df)
+   yesterday_trends(df, max_date)
 
 with tab2:
    historical_trends(df)

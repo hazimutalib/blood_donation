@@ -17,11 +17,14 @@ import telebot
 from spire.presentation import Presentation as Presentation2, FileFormat
 
 
-def yesterday_trends(df):
+
+
+
+def yesterday_trends(df, max_date):
     column = st.columns([7,2])
     column[0].write("""### Malaysia's Blood Donation Daily Updates (2024)""")
     column[1].write(""" """)
-    column[1].write(""" Data as of {}""".format(max(df.date)))
+    column[1].write(""" Data as of {}""".format(max_date))
     
     df = df[df.year == '2024']
 
@@ -105,10 +108,13 @@ def yesterday_trends(df):
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor='white', paper_bgcolor = 'white')
-    
     st.write(fig)
 
-    if st.button('Upload'):
+
+    today_date = datetime.now().date
+    url_to_check = 'https://github.com/hazimutalib/blood_donation/blob/main/infographic/blood_donation_{}.pdf'.format(max_date)
+    response = requests.get(url_to_check)
+    if (today_date - max_date == 1) & (response.status_code // 100 != 2):
         repo_owner = 'hazimutalib'
         repo_name = 'blood_donation'
         template_path = './blood_donation.pptx'
@@ -119,13 +125,12 @@ def yesterday_trends(df):
 
 
         upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol, malaysia_total, kuala_lumpur_total, kedah_total, 
-                              perak_total, johor_total, sarawak_total, pulau_pinang_total, sabah_total, melaka_total, selangor_total, 
-                             negeri_sembilan_total, terengganu_total, pahang_total, kelantan_total, max(df.date), malaysia.iloc[0], kuala_lumpur.iloc[0], kedah.iloc[0], 
-                              perak.iloc[0], johor.iloc[0], sarawak.iloc[0], pulau_pinang.iloc[0], sabah.iloc[0], melaka.iloc[0], selangor.iloc[0], 
-                             negeri_sembilan.iloc[0], terengganu.iloc[0], pahang.iloc[0], kelantan.iloc[0])
+                            perak_total, johor_total, sarawak_total, pulau_pinang_total, sabah_total, melaka_total, selangor_total, 
+                            negeri_sembilan_total, terengganu_total, pahang_total, kelantan_total, max_date, malaysia, kuala_lumpur, kedah, 
+                            perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
+                            negeri_sembilan, terengganu, pahang, kelantan)
         
-
-        file_path_pdf = './infographic/blood_donation_{}.pdf'.format(max(df.date))
+        file_path_pdf = './infographic/blood_donation_{}.pdf'.format(max_date)
         presentation2 = Presentation2()
         presentation2.LoadFromFile(file_path)
         presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
@@ -145,7 +150,7 @@ def yesterday_trends(df):
 
         Thank you to all donors for making a difference! 💖
         #BloodDonation #DonateLife #SaveLives
-   
+
                         """.format(max(df.date))
         try:
             bot.send_message(channel_id, message, parse_mode='Markdown')
@@ -153,7 +158,6 @@ def yesterday_trends(df):
                 bot.send_document(channel_id, file)
         except:
             print('Message failed to send')
-
 
 
 def historical_trends(df):
@@ -283,3 +287,56 @@ def retention_trends():
     fig.update_yaxes(showticklabels=False)
     fig.update_yaxes(showgrid=False)
     st.write(fig)
+
+
+
+
+def process_date(df, max_date):
+    today_date = datetime.now().date
+    url_to_check = 'https://github.com/hazimutalib/blood_donation/blob/main/infographic/blood_donation_{}.pdf'.format(max_date)
+    response = requests.get(url_to_check)
+    if (today_date - max_date == 1) & (response.status_code // 100 != 2):
+        repo_owner = 'hazimutalib'
+        repo_name = 'blood_donation'
+        template_path = './blood_donation.pptx'
+        file_path = './infographic/blood_donation_{}.pptx'.format(max(df.date))
+        lol = 'ghp_XQuAk8BlOgV2PNLwq3qWbuMG0DwuQI46YKk0'
+        
+        lol = lol.replace('2','1').replace('3','2').replace('4','3').replace('6','5')
+
+
+        upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol, malaysia_total, kuala_lumpur_total, kedah_total, 
+                            perak_total, johor_total, sarawak_total, pulau_pinang_total, sabah_total, melaka_total, selangor_total, 
+                            negeri_sembilan_total, terengganu_total, pahang_total, kelantan_total, max(df.date), malaysia.iloc[0], kuala_lumpur.iloc[0], kedah.iloc[0], 
+                            perak.iloc[0], johor.iloc[0], sarawak.iloc[0], pulau_pinang.iloc[0], sabah.iloc[0], melaka.iloc[0], selangor.iloc[0], 
+                            negeri_sembilan.iloc[0], terengganu.iloc[0], pahang.iloc[0], kelantan.iloc[0])
+        
+
+        file_path_pdf = './infographic/blood_donation_{}.pdf'.format(max(df.date))
+        presentation2 = Presentation2()
+        presentation2.LoadFromFile(file_path)
+        presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
+        presentation2.Dispose()
+        upload_pdf_to_github(file_path_pdf, lol, repo_owner, repo_name)
+
+        tkn = '6430193325:AAFkiOTYhb574_owPQVunkNHslzIxRAtNX8'
+
+        bot = telebot.TeleBot(tkn)
+
+        channel_id = '@blood_donatio'
+        message = """
+        🩸 **Blood Donation Update - {}** 🩸
+        📈 Today's Blood Donation Count:
+        - Total Donations: [Total Count]
+        - New Donations: [New Count]
+
+        Thank you to all donors for making a difference! 💖
+        #BloodDonation #DonateLife #SaveLives
+
+                        """.format(max(df.date))
+        try:
+            bot.send_message(channel_id, message, parse_mode='Markdown')
+            with open(file_path_pdf, 'rb') as file:
+                bot.send_document(channel_id, file)
+        except:
+            print('Message failed to send')
