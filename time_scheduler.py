@@ -94,12 +94,12 @@ def job():
 
         x = 0
 
+        st.write(datetime.now() + timedelta(hours = 8))
 
 
-
-
-schedule.every(1).minutes.do(job)
+# schedule.every(1).minutes.do(job)
 
 while True:
-    schedule.run_pending()
-    time.sleep(60)
+    # schedule.run_pending()
+    job()
+    time.sleep(2700)
