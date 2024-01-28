@@ -47,60 +47,60 @@ response = requests.get(url_to_check)
 difference = today_date - max_date
 
 
-# def job():
-#     if (difference.days == 1) & (response.status_code // 100 != 2):
-#         repo_owner = 'hazimutalib'
-#         repo_name = 'blood_donation'
-#         template_path = './blood_donation.pptx'
-#         file_path = './infographic/blood_donation_{}.pptx'.format(max(df.date))
-#         lol = 'ghp_XQuAk8BlOgV2PNLwq3qWbuMG0DwuQI46YKk0'
+def job():
+    if (difference.days == 1) & (response.status_code // 100 != 2):
+        repo_owner = 'hazimutalib'
+        repo_name = 'blood_donation'
+        template_path = './blood_donation.pptx'
+        file_path = './infographic/blood_donation_{}.pptx'.format(max(df.date))
+        lol = 'ghp_XQuAk8BlOgV2PNLwq3qWbuMG0DwuQI46YKk0'
 
-#         lol = lol.replace('2','1').replace('3','2').replace('4','3').replace('6','5')
-
-
-#         upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol, malaysia_total, kuala_lumpur_total, kedah_total, 
-#                             perak_total, johor_total, sarawak_total, pulau_pinang_total, sabah_total, melaka_total, selangor_total, 
-#                             negeri_sembilan_total, terengganu_total, pahang_total, kelantan_total, max_date, malaysia, kuala_lumpur, kedah, 
-#                             perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
-#                             negeri_sembilan, terengganu, pahang, kelantan)
-
-#         file_path_pdf = './infographic/blood_donation_{}.pdf'.format(max_date)
-#         presentation2 = Presentation2()
-#         presentation2.LoadFromFile(file_path)
-#         presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
-#         presentation2.Dispose()
-#         upload_pdf_to_github(file_path_pdf, lol, repo_owner, repo_name)
-
-#         tkn = '6430193325:AAFkiOTYhb574_owPQVunkNHslzIxRAtNX8'
-
-#         bot = telebot.TeleBot(tkn)
-
-#         channel_id = '@blood_donatio'
-#         message = """
-#         🩸 **Blood Donation Update of 2024 - Data as of {}** 🩸
-#         📈 Today's Blood Donation Count:
-#         - Total Donations: {:,}
-#         - Latest Daily Donations: {:,}
-
-#         Thank you to all donors for making a difference! 💖
-#         #BloodDonation #DonateLife #SaveLives
-
-#                         """.format(max_date, malaysia_total, malaysia)
-#         try:
-#             bot.send_message(channel_id, message, parse_mode='Markdown')
-#             with open(file_path_pdf, 'rb') as file:
-#                 bot.send_document(channel_id, file)
-#         except:
-#             print('Message failed to send')
-
-#         x = 0
-
-#     else:
-#         st. write('###### Data has not been updated')
+        lol = lol.replace('2','1').replace('3','2').replace('4','3').replace('6','5')
 
 
-# schedule.every(60).minutes.do(job)
+        upload_pptx_to_github(repo_owner, repo_name, template_path, file_path, lol, malaysia_total, kuala_lumpur_total, kedah_total, 
+                            perak_total, johor_total, sarawak_total, pulau_pinang_total, sabah_total, melaka_total, selangor_total, 
+                            negeri_sembilan_total, terengganu_total, pahang_total, kelantan_total, max_date, malaysia, kuala_lumpur, kedah, 
+                            perak, johor, sarawak, pulau_pinang, sabah, melaka, selangor, 
+                            negeri_sembilan, terengganu, pahang, kelantan)
 
-# while True:
-#     schedule.run_pending()
-#     time.sleep(30)
+        file_path_pdf = './infographic/blood_donation_{}.pdf'.format(max_date)
+        presentation2 = Presentation2()
+        presentation2.LoadFromFile(file_path)
+        presentation2.SaveToFile(file_path_pdf, FileFormat.PDF)
+        presentation2.Dispose()
+        upload_pdf_to_github(file_path_pdf, lol, repo_owner, repo_name)
+
+        tkn = '6430193325:AAFkiOTYhb574_owPQVunkNHslzIxRAtNX8'
+
+        bot = telebot.TeleBot(tkn)
+
+        channel_id = '@blood_donatio'
+        message = """
+        🩸 **Blood Donation Update of 2024 - Data as of {}** 🩸
+        📈 Today's Blood Donation Count:
+        - Total Donations: {:,}
+        - Latest Daily Donations: {:,}
+
+        Thank you to all donors for making a difference! 💖
+        #BloodDonation #DonateLife #SaveLives
+
+                        """.format(max_date, malaysia_total, malaysia)
+        try:
+            bot.send_message(channel_id, message, parse_mode='Markdown')
+            with open(file_path_pdf, 'rb') as file:
+                bot.send_document(channel_id, file)
+        except:
+            print('Message failed to send')
+
+        x = 0
+
+    else:
+        st. write('###### Data has not been updated')
+
+
+schedule.every(60).minutes.do(job)
+
+while True:
+    schedule.run_pending()
+    time.sleep(3600)
