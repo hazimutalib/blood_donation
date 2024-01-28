@@ -43,6 +43,7 @@ terengganu, kuala_lumpur] = negeri_value
 url_to_check = 'https://github.com/hazimutalib/blood_donation/blob/main/infographic/blood_donation_{}.pdf'.format(max_date)
 response = requests.get(url_to_check)
 
+
 def job():
     today_date = datetime.now().date()
     difference = today_date - max_date
