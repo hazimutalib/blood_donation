@@ -40,13 +40,12 @@ negeri_value = [df[(df.date == df.date.max()) & (df.state == "{}".format(x))].da
 pahang, perak, pulau_pinang, sabah, sarawak, selangor, 
 terengganu, kuala_lumpur] = negeri_value
 
-today_date = datetime.now().date()
 url_to_check = 'https://github.com/hazimutalib/blood_donation/blob/main/infographic/blood_donation_{}.pdf'.format(max_date)
 response = requests.get(url_to_check)
-difference = today_date - max_date
-
 
 def job():
+    today_date = datetime.now().date()
+    difference = today_date - max_date
     if (difference.days == 1) & (response.status_code // 100 != 2):
         repo_owner = 'hazimutalib'
         repo_name = 'blood_donation'
