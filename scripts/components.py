@@ -152,11 +152,20 @@ def historical_trends(df):
 
 def retention_trends():
     st.write("""### Malaysia's Blood Donors Retention Trends (2012 - 2024)""")
+    
+
     parquet_file_url = 'https://dub.sh/ds-data-granular'
     response = requests.get(parquet_file_url)
     parquet_data = BytesIO(response.content)
     df_granular = pq.read_pandas(parquet_data).to_pandas()
     df_granular.visit_date = pd.to_datetime(df_granular.visit_date).dt.date
+
+    column = st.columns([7,2])
+    column[0].write("""### Malaysia's Blood Donors Retention Trends (2012 - 2024)""")
+    column[1].write("""  """)
+    column[1].write("""  Data as of {}""".format(max(df_granular.visit_date)))
+
+
     donors = len(df_granular.donor_id)
     unique_donors = len(df_granular.donor_id.unique())
 

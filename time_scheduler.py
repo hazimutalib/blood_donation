@@ -25,7 +25,7 @@ df['year'] = df['date'].astype('str').apply(lambda x: x[:4])
 max_date = max(df.date)
 
 column = st.columns([7,2])
-column[0].write("""### Malaysia's Blood Donation Daily Updates (2024)""")
+column[0].write("""### Status of Data""")
 column[1].write(""" """)
 column[1].write(""" Data as of {}""".format(max_date))
 
@@ -103,4 +103,4 @@ schedule.every(60).minutes.do(job)
 
 while True:
     schedule.run_pending()
-    time.sleep(3600)
+    time.sleep(1800)
