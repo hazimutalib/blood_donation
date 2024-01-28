@@ -4,7 +4,6 @@ import pyarrow.parquet as pq
 import matplotlib.pyplot as plt
 import plotly.express as px 
 from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
 from io import BytesIO
 import requests
 from scripts.upload_file_to_github import upload_pptx_to_github, upload_pdf_to_github
@@ -45,7 +44,8 @@ response = requests.get(url_to_check)
 
 
 def job():
-    today_date = datetime.now().date()
+    today_date = datetime.now() + timedelta(hours = 8)
+    today_date = today_date.date()
     difference = today_date - max_date
     if (difference.days == 1) & (response.status_code // 100 != 2):
         repo_owner = 'hazimutalib'
@@ -93,6 +93,8 @@ def job():
             print('Message failed to send')
 
         x = 0
+    else:
+        st.write(datetime.now() + timedelta(hours = 8))
 
 
 
@@ -101,4 +103,4 @@ schedule.every(1).minutes.do(job)
 
 while True:
     schedule.run_pending()
-    time.sleep(1)
+    time.sleep(60)
