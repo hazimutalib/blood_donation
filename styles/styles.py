@@ -8,9 +8,24 @@ def body_css():
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
     h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+    }}
     </style>
                 
     """, unsafe_allow_html=True,)
+
+def plotly_css():
+    st.markdown(
+    f"""
+    <style>
+    .stPlotlyChart {{
+     outline: 8px solid {'#FFFFFF'};
+     border-radius: 8px;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.20), 0 6px 20px 0 rgba(0, 0, 0, 0.30);
+    }}
+    </style>
+    """, unsafe_allow_html=True
+)
+
 
 def kpi_box_css():
     st.markdown("""
