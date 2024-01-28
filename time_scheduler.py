@@ -97,7 +97,7 @@ def job():
         st.write(datetime.now())
 
 
-schedule.every(60).minutes.do(job)
+schedule.every(1).minutes.do(job)
 
 while True:
     schedule.run_pending()
