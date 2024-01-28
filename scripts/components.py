@@ -111,7 +111,7 @@ def latest_trends(df, max_date):
     st.write(fig)
 
 
-    today_date = datetime.now().date
+    today_date = datetime.now().date()
     url_to_check = 'https://github.com/hazimutalib/blood_donation/blob/main/infographic/blood_donation_{}.pdf'.format(max_date)
     response = requests.get(url_to_check)
     difference = today_date - max_date
