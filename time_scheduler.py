@@ -94,8 +94,7 @@ def job():
 
         x = 0
 
-    else:
-        st.write(datetime.now())
+
 
 
 schedule.every(1).minutes.do(job)
