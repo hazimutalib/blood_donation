@@ -14,7 +14,6 @@ import telebot
 from spire.presentation import Presentation as Presentation2, FileFormat
 from styles.styles import body_css
 
-st.write('##### Status of Data')
 body_css()
 
 #read aggregated data
