@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 from styles.styles import kpi_box_css, body_css,  plotly_css
-from scripts.components import yesterday_trends, historical_trends, retention_trends
+from scripts.components import latest_trends, historical_trends, retention_trends
 
 
 #set the layout of the web app 
@@ -32,7 +32,7 @@ max_date = max(df.date)
 #web app tabs
 tab1, tab2, tab3 = st.tabs(["Latest daily trends", "Historical trends", "Blood retention trends"])
 with tab1:
-   yesterday_trends(df, max_date)
+   latest_trends(df, max_date)
 
 with tab2:
    historical_trends(df)

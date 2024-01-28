@@ -20,7 +20,7 @@ from spire.presentation import Presentation as Presentation2, FileFormat
 
 
 
-def yesterday_trends(df, max_date):
+def latest_trends(df, max_date):
     column = st.columns([7,2])
     column[0].write("""### Malaysia's Blood Donation Daily Updates (2024)""")
     column[1].write(""" """)
@@ -114,7 +114,8 @@ def yesterday_trends(df, max_date):
     today_date = datetime.now().date
     url_to_check = 'https://github.com/hazimutalib/blood_donation/blob/main/infographic/blood_donation_{}.pdf'.format(max_date)
     response = requests.get(url_to_check)
-    if (today_date - max_date == 1) & (response.status_code // 100 != 2):
+    difference = today_date - max_date
+    if (difference.days == 1) & (response.status_code // 100 != 2):
         repo_owner = 'hazimutalib'
         repo_name = 'blood_donation'
         template_path = './blood_donation.pptx'
