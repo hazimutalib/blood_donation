@@ -7,14 +7,11 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from io import BytesIO
 import requests
-from styles.styles import kpi_box_malaysia, kpi_box_css, body_css, kpi_box_granular
+from styles.styles import kpi_box_malaysia, kpi_box_granular
 from styles.styles import kpi_box_kuala_lumpur, kpi_box_kedah, kpi_box_perak, kpi_box_johor, kpi_box_sarawak, kpi_box_pulau_pinang, kpi_box_sabah, kpi_box_melaka
 from styles.styles import kpi_box_selangor, kpi_box_negeri_sembilan, kpi_box_terengganu, kpi_box_pahang, kpi_box_kelantan, kpi_box_perlis, kpi_box_putrajaya, kpi_box_labuan
-from .upload_file_to_github import upload_pptx_to_github, upload_pdf_to_github
 import time
-import schedule
-import telebot
-from spire.presentation import Presentation as Presentation2, FileFormat
+
 
 
 def latest_trends(df, max_date):
