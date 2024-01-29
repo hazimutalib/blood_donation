@@ -77,39 +77,6 @@ df_granular['visit_age'] = df_granular.visit_year - df_granular.birth_date
 df_new = df_granular.groupby(['donor_id'])['birth_date'].mean().sort_values(ascending=False).reset_index()
 df_new['age'] = 2024 - df_new['birth_date']
 df_new['age_band'] = ''
-
-
-# df_new.age_band[df_new.age < 18] = '0 - 17'
-# df_new.age_band[(df_new.age >= 18) & (df_new.age < 30)] = '18-29'
-# df_new.age_band[(df_new.age >= 30) & (df_new.age < 40)] = '30-39'
-# df_new.age_band[(df_new.age >= 40) & (df_new.age < 50)] = '40-49'
-# df_new.age_band[(df_new.age >= 50) & (df_new.age < 60)] = '50-59'
-# df_new.age_band[(df_new.age >= 60)] = '60>='
-# df_new1  = df_new.groupby(['age_band'])['age_band'].count()
-
-# df_new2 = df_granular
-# df_new2['visit_age_band'] = ''
-# df_new2.visit_age_band[df_new2.visit_age < 18] = '0 - 17'
-# df_new2.visit_age_band[(df_new2.visit_age >= 18) & (df_new2.visit_age < 30)] = '18-29'
-# df_new2.visit_age_band[(df_new2.visit_age >= 30) & (df_new2.visit_age < 40)] = '30-39'
-# df_new2.visit_age_band[(df_new2.visit_age >= 40) & (df_new2.visit_age < 50)] = '40-49'
-# df_new2.visit_age_band[(df_new2.visit_age >= 50) & (df_new2.visit_age < 60)] = '50-59'
-# df_new2.visit_age_band[(df_new2.visit_age >= 60)] = '60>='
-# df_new3  = df_new2.groupby(['visit_age_band'])['visit_age_band'].count()
-
-# df_new4 = df_granular.groupby('donor_id')['visit_date'].count().reset_index()
-# df_new5 = df_new4.groupby('visit_date')['donor_id'].count().reset_index()
-# df_new5['frequency'] = df_new5.visit_date.astype('str')
-# df_new5.frequency[(df_new5.visit_date == 1)] = '1'
-# df_new5.frequency[(df_new5.visit_date == 2)] = '2'
-# df_new5.frequency[(df_new5.visit_date >= 3) & (df_new5.visit_date < 10)] = '3 - 9'
-# df_new5.frequency[(df_new5.visit_date >= 10) & (df_new5.visit_date < 20)] = '10 - 19'
-# df_new5.frequency[(df_new5.visit_date >= 20) & (df_new5.visit_date < 30)] = '20 - 29'
-# df_new5.frequency[(df_new5.visit_date >= 30) & (df_new5.visit_date < 40)] = '30 - 39'
-# df_new5.frequency[(df_new5.visit_date >= 40) & (df_new5.visit_date < 50)] = '40 - 49'
-# df_new5.frequency[(df_new5.visit_date >= 50)] = '50>='
-
-
 df_new.loc[df_new.age < 18, 'age_band'] = '0 - 17'
 df_new.loc[(df_new.age >= 18) & (df_new.age < 30), 'age_band'] = '18-29'
 df_new.loc[(df_new.age >= 30) & (df_new.age < 40), 'age_band'] = '30-39'
