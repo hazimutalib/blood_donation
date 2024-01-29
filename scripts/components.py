@@ -95,6 +95,7 @@ def latest_trends(df, max_date):
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_traces(texttemplate='%{text:.2s}', textposition='top center')
+    # fig.write_image('./charts/malaysia_daily_{}.png'.format(max_date))
     st.write(fig)
 
     st.write("""######  """)
@@ -105,6 +106,7 @@ def latest_trends(df, max_date):
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
     fig.update_layout(plot_bgcolor='white', paper_bgcolor = 'white')
+    # fig.write_image('./charts/state_daily_{}.png'.format(max_date))
     st.write(fig)
 
 
@@ -158,10 +160,12 @@ def retention_trends():
     df_granular = pq.read_pandas(parquet_data).to_pandas()
     df_granular.visit_date = pd.to_datetime(df_granular.visit_date).dt.date
 
+    max_granular_date = max(df_granular.visit_date)
+
     column = st.columns([7,2])
     column[0].write("""### Malaysia's Blood Donors Retention Trends (2012 - 2024)""")
     column[1].write("""  """)
-    column[1].write("""  Data as of {}""".format(max(df_granular.visit_date)))
+    column[1].write("""  Data as of {}""".format(max_granular_date))
 
     donors = len(df_granular.donor_id)
     unique_donors = len(df_granular.donor_id.unique())
@@ -214,6 +218,7 @@ def retention_trends():
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_yaxes(showticklabels=False)
     fig.update_yaxes(showgrid=False)
+    fig.write_image('./charts/blood_retention_age_whole_{}.png'.format(max_granular_date))
     st.write(fig)
 
     st.write("""##### """)
@@ -223,10 +228,10 @@ def retention_trends():
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
-    # fig.update_layout(yaxis = {"categoryorder":"total ascending"})
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_yaxes(showticklabels=False)
     fig.update_yaxes(showgrid=False)
+    fig.write_image('./charts/blood_retention_age_unique_{}.png'.format(max_granular_date))
     st.write(fig)
     
     st.write("""##### """)
@@ -240,5 +245,7 @@ def retention_trends():
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_yaxes(showticklabels=False)
     fig.update_yaxes(showgrid=False)
+    fig.write_image('./charts/blood_retention_frequency_{}.png'.format(max_granular_date))
     st.write(fig)
+
 
