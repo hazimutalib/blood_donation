@@ -32,7 +32,7 @@ def latest_trends(df, max_date):
     pahang, perak, pulau_pinang, sabah, sarawak, selangor, 
     terengganu, kuala_lumpur] = negeri_value
   
-    tab1, tab2 = st.tabs(["Cumulative count of blood donations", "Yesterday count of blood donations"])
+    tab1, tab2 = st.tabs(["Cumulative count of blood donations", "Latest daily count of blood donations"])
 
     with tab1:
         kpi_box_malaysia(malaysia_total)
