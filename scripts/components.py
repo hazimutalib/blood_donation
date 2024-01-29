@@ -211,11 +211,10 @@ def retention_trends():
     fig.update_traces(showlegend = False)
     fig.update_layout(yaxis_title=None)
     fig.update_layout(xaxis_title=None)
-    # fig.update_layout(yaxis = {"categoryorder":"total ascending"})
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_yaxes(showticklabels=False)
     fig.update_yaxes(showgrid=False)
-    fig.write_image('./charts/blood_retention_age_whole_{}.png'.format(max_granular_date))
+    # fig.write_image('./charts/blood_retention_age_whole_{}.png'.format(max_granular_date))
     st.write(fig)
 
     st.write("""##### """)
@@ -228,7 +227,7 @@ def retention_trends():
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_yaxes(showticklabels=False)
     fig.update_yaxes(showgrid=False)
-    fig.write_image('./charts/blood_retention_age_unique_{}.png'.format(max_granular_date))
+    # fig.write_image('./charts/blood_retention_age_unique_{}.png'.format(max_granular_date))
     st.write(fig)
     
     st.write("""##### """)
@@ -242,7 +241,7 @@ def retention_trends():
     fig.update_layout(plot_bgcolor="rgba(255,255,255,1)", paper_bgcolor = "rgba(255,255,255,1)")
     fig.update_yaxes(showticklabels=False)
     fig.update_yaxes(showgrid=False)
-    fig.write_image('./charts/blood_retention_frequency_{}.png'.format(max_granular_date))
+    # fig.write_image('./charts/blood_retention_frequency_{}.png'.format(max_granular_date))
     st.write(fig)
 
 
