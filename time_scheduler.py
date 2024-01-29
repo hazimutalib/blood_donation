@@ -97,9 +97,4 @@ def job():
         st.write(datetime.now() + timedelta(hours = 8))
 
 
-# schedule.every(1).minutes.do(job)
-
-while True:
-    # schedule.run_pending()
-    job()
-    time.sleep(2700)
+job()
